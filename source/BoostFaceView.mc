@@ -8,10 +8,10 @@ using Toybox.Time;
 using Toybox.Time.Gregorian;
 using Toybox.Math;
 
-// Boost Graph watch face — data-dense variant (no COB).
-// Layout (from the approved-face template, minus COB): data-age up top · row of IOB + sensitivity +
-// big band-coloured BG with delta/arrow · divider · large time | date + steps · divider · 12-point BG
-// trend graph · divider · centred battery. Positions are WFF-style box-centres scaled by R = screen/450.
+// Boost Graph watch face — data-dense variant (no COB), with the Boost BG ring around the outside.
+// Layout: Boost BG ring (perimeter) · data-age top · IOB + TBR + big band-coloured BG (blue delta/arrow)
+// · divider · HERO time | date + steps · divider · 12-point BG trend graph · divider · centred battery.
+// Positions are WFF-style box-centres scaled by R = screen/450; centre is (225,225) in that space.
 class BoostFaceView extends WatchUi.WatchFace {
 
     var _lowPower as Boolean = false;   // true in always-on (AOD) mode
@@ -19,6 +19,7 @@ class BoostFaceView extends WatchUi.WatchFace {
     const CTR = Graphics.TEXT_JUSTIFY_CENTER;
     const VC  = Graphics.TEXT_JUSTIFY_CENTER | Graphics.TEXT_JUSTIFY_VCENTER;
     const LVC = Graphics.TEXT_JUSTIFY_LEFT   | Graphics.TEXT_JUSTIFY_VCENTER;
+    const BLUE = 0x4FC3F7;   // delta / date / battery accent
 
     function initialize() { WatchFace.initialize(); }
     function onLayout(dc as Graphics.Dc) as Void {}
@@ -55,75 +56,103 @@ class BoostFaceView extends WatchUi.WatchFace {
         var teal = 0x80CBC4;
         var greyBlue = 0xB0BEC5;
 
+        // ── Boost BG ring (perimeter, band-coloured fill of the 300° sweep) ──
+        drawRing(dc, cx, cy, (206 * R).toNumber(), BoostData.bgFrac(bg), stale ? 0x5A5A5A : band, R);
+
         // ── data age (top centre): clock glyph + "Nm" ──
         var ageStr = (age >= 0) ? age.toString() + "m" : "--";
-        var agY = (44 * R).toNumber();
+        var agY = (48 * R).toNumber();
         drawClock(dc, (cx - 22 * R).toNumber(), agY, (9 * R).toNumber(), greyBlue);
         dc.setColor(greyBlue, Graphics.COLOR_TRANSPARENT);
         dc.drawText((cx - 6 * R).toNumber(), agY, vf(22, false, R, Graphics.FONT_XTINY), ageStr, LVC);
 
-        // ── top data row: IOB (x100) · sensitivity (x205) · BG (right, big) ──
+        // ── top data row: IOB (x100) · TBR (x205) · BG (right, big) ──
         var iob = BoostData.iob();
-        var isf = BoostData.isf();
+        var tbrV = BoostData.tbr();
         var icY = (100 * R).toNumber();
         var vaY = (146 * R).toNumber();
-        drawSyringe(dc, (100 * R).toNumber(), icY, (16 * R).toNumber(), Graphics.COLOR_WHITE);
-        drawSensIcon(dc, (205 * R).toNumber(), icY, (16 * R).toNumber(), Graphics.COLOR_WHITE);
+        drawSyringe(dc, (100 * R).toNumber(), icY, (14 * R).toNumber(), Graphics.COLOR_WHITE);
+        drawTbrIcon(dc, (205 * R).toNumber(), icY, (14 * R).toNumber(), Graphics.COLOR_WHITE);
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
         dc.drawText((100 * R).toNumber(), vaY, vf(30, false, R, Graphics.FONT_MEDIUM),
                     (iob == null ? "--" : fmt1(iob) + "U"), VC);
         dc.drawText((205 * R).toNumber(), vaY, vf(30, false, R, Graphics.FONT_MEDIUM),
-                    (isf == null ? "--" : isf.format("%d") + "%"), VC);
+                    (tbrV == null ? "--" : tbrV.format("%d") + "%"), VC);
 
-        // BG: delta + trend arrow above, big band-coloured value.
-        drawTrendArrows(dc, (388 * R).toNumber(), (100 * R).toNumber(), (11 * R).toNumber(), BoostData.dir(), bgCol);
-        dc.setColor(bgCol, Graphics.COLOR_TRANSPARENT);
-        dc.drawText((350 * R).toNumber(), (100 * R).toNumber(), vf(24, false, R, Graphics.FONT_SMALL),
+        // BG: blue delta + blue trend arrow above, big band-coloured value. Inset to clear the ring.
+        drawTrendArrows(dc, (372 * R).toNumber(), (100 * R).toNumber(), (11 * R).toNumber(), BoostData.dir(), BLUE);
+        dc.setColor(BLUE, Graphics.COLOR_TRANSPARENT);
+        dc.drawText((338 * R).toNumber(), (100 * R).toNumber(), vf(24, false, R, Graphics.FONT_SMALL),
                     BoostData.deltaText(), VC);
-        dc.drawText((338 * R).toNumber(), (150 * R).toNumber(), vf(60, true, R, Graphics.FONT_NUMBER_MEDIUM), BoostData.bgText(), VC);
+        dc.setColor(bgCol, Graphics.COLOR_TRANSPARENT);
+        dc.drawText((330 * R).toNumber(), (150 * R).toNumber(), vf(60, true, R, Graphics.FONT_NUMBER_MEDIUM), BoostData.bgText(), VC);
 
         // ── divider 1 ──
         hline(dc, R, 188);
 
-        // ── time (big, left) | date + steps (right) ──
+        // ── HERO time (big, left) | date + steps (right) ──
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText((150 * R).toNumber(), (240 * R).toNumber(), vf(62, false, R, Graphics.FONT_NUMBER_MEDIUM), timeStr, VC);
+        dc.drawText((150 * R).toNumber(), (240 * R).toNumber(), vf(90, true, R, Graphics.FONT_NUMBER_HOT), timeStr, VC);
         dc.setColor(0x444444, Graphics.COLOR_TRANSPARENT);
         var pw2 = (2 * R).toNumber(); if (pw2 < 1) { pw2 = 1; }
         dc.setPenWidth(pw2);
-        dc.drawLine((288 * R).toNumber(), (212 * R).toNumber(), (288 * R).toNumber(), (268 * R).toNumber());
+        dc.drawLine((292 * R).toNumber(), (212 * R).toNumber(), (292 * R).toNumber(), (268 * R).toNumber());
         dc.setPenWidth(1);
-        dc.setColor(0x4FC3F7, Graphics.COLOR_TRANSPARENT);   // date in the template's blue
-        dc.drawText((312 * R).toNumber(), (222 * R).toNumber(), vf(26, false, R, Graphics.FONT_SMALL), dateShort(), LVC);
-        drawFootprints(dc, (322 * R).toNumber(), (262 * R).toNumber(), (18 * R).toNumber(), teal);
+        dc.setColor(BLUE, Graphics.COLOR_TRANSPARENT);
+        dc.drawText((316 * R).toNumber(), (222 * R).toNumber(), vf(26, false, R, Graphics.FONT_SMALL), dateShort(), LVC);
+        drawFootprints(dc, (326 * R).toNumber(), (262 * R).toNumber(), (18 * R).toNumber(), teal);
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText((340 * R).toNumber(), (262 * R).toNumber(), vf(24, false, R, Graphics.FONT_SMALL), stepStr(), LVC);
+        dc.drawText((344 * R).toNumber(), (262 * R).toNumber(), vf(24, false, R, Graphics.FONT_SMALL), stepStr(), LVC);
 
         // ── divider 2 ──
         hline(dc, R, 296);
 
-        // ── BG trend graph (12 points) ──
-        drawGraph(dc, (95 * R).toNumber(), (312 * R).toNumber(), (260 * R).toNumber(), (72 * R).toNumber(), band, stale, R);
+        // ── BG trend graph (12 points), inset to clear the ring ──
+        drawGraph(dc, (108 * R).toNumber(), (315 * R).toNumber(), (234 * R).toNumber(), (64 * R).toNumber(), band, stale, R);
 
-        // ── divider 3 ──
+        // ── divider 3 (auto-inset by hline) ──
         hline(dc, R, 396);
 
-        // ── battery (centred) ──
+        // ── battery (centred, in the ring's bottom gap) ──
         var pct = System.getSystemStats().battery;
-        drawBatteryCentred(dc, cx, (422 * R).toNumber(), (34 * R).toNumber(), pct);
+        drawBatteryCentred(dc, cx, (424 * R).toNumber(), (34 * R).toNumber(), pct);
     }
 
-    // Full-width faint divider at WFF-y `y`.
-    function hline(dc, R, y) as Void {
-        dc.setColor(0x3A3A3A, Graphics.COLOR_TRANSPARENT);
-        var pw = (2 * R).toNumber(); if (pw < 1) { pw = 1; }
+    // Boost BG ring: dim track + band fill of `frac` over a 300° sweep from the top (60° gap at bottom).
+    function drawRing(dc, cx, cy, r, frac, color, R) as Void {
+        var startDeg = 240;
+        var maxSweep = 300.0;
+        var pw = (11 * R).toNumber(); if (pw < 5) { pw = 5; }
         dc.setPenWidth(pw);
-        dc.drawLine((60 * R).toNumber(), (y * R).toNumber(), (390 * R).toNumber(), (y * R).toNumber());
+        dc.setColor(0x333333, Graphics.COLOR_TRANSPARENT);
+        dc.drawArc(cx, cy, r, Graphics.ARC_CLOCKWISE, startDeg, startDeg - maxSweep + 360);
+        if (frac > 0.0) {
+            var end = startDeg - (frac * maxSweep);
+            if (end < 0) { end += 360; }
+            dc.setColor(color, Graphics.COLOR_TRANSPARENT);
+            dc.drawArc(cx, cy, r, Graphics.ARC_CLOCKWISE, startDeg, end);
+        }
         dc.setPenWidth(1);
     }
 
-    // 12-point BG trend line + faint target guides + a band-coloured current dot.
-    // hist is newest→oldest (sgv, mgdl). Box (x0,y0)=top-left, wpx×hpx.
+    // Horizontal divider, auto-inset near top/bottom so it stays inside the perimeter ring (r=205).
+    function hline(dc, R, y) as Void {
+        var dy = (y - 225).abs();
+        var hw = 165;
+        if (dy > 95) {
+            var rr = 205.0 * 205.0 - dy.toFloat() * dy;
+            hw = (rr > 0) ? (Math.sqrt(rr).toNumber() - 12) : 60;
+            if (hw > 165) { hw = 165; }
+            if (hw < 40)  { hw = 40; }
+        }
+        dc.setColor(0x3A3A3A, Graphics.COLOR_TRANSPARENT);
+        var pw = (2 * R).toNumber(); if (pw < 1) { pw = 1; }
+        dc.setPenWidth(pw);
+        dc.drawLine(((225 - hw) * R).toNumber(), (y * R).toNumber(), ((225 + hw) * R).toNumber(), (y * R).toNumber());
+        dc.setPenWidth(1);
+    }
+
+    // 12-point BG trend line + faint target guides + a band-coloured current dot. hist newest→oldest.
     function drawGraph(dc, x0, y0, wpx, hpx, band, stale, R) as Void {
         var loMg = 40.0;
         var hiMg = 300.0;
@@ -145,7 +174,7 @@ class BoostFaceView extends WatchUi.WatchFace {
         var prevX = null;
         var prevY = null;
         for (var k = 0; k < n; k++) {
-            var v = arr[n - 1 - k];   // oldest at left
+            var v = arr[n - 1 - k];
             if (!(v instanceof Number) && !(v instanceof Float)) { prevX = null; continue; }
             var vv = v.toFloat();
             if (vv < loMg) { vv = loMg; }
@@ -216,32 +245,38 @@ class BoostFaceView extends WatchUi.WatchFace {
         dc.setPenWidth(1);
     }
 
-    // Syringe (IOB): barrel + plunger flange + needle along a shallow up-right diagonal.
+    // Syringe (IOB): plunger rod + flange · barrel (rounded rect) · needle — horizontal, clear at small size.
     function drawSyringe(dc, x, y, s, color) as Void {
         dc.setColor(color, Graphics.COLOR_TRANSPARENT);
-        var pw = (2 * s / 16.0).toNumber(); if (pw < 2) { pw = 2; }
+        var pw = (s / 7.0).toNumber(); if (pw < 2) { pw = 2; }
         dc.setPenWidth(pw);
-        var bx0 = (x - s).toNumber();       var by0 = (y + s * 0.5).toNumber();
-        var bx1 = (x + s * 0.4).toNumber(); var by1 = (y - s * 0.2).toNumber();
-        dc.drawLine((bx0 - s * 0.3).toNumber(), (by0 + s * 0.3).toNumber(), bx1, by1);           // barrel
-        dc.drawLine((bx0 - s * 0.45).toNumber(), (by0 + s * 0.05).toNumber(), (bx0 - s * 0.05).toNumber(), (by0 + s * 0.55).toNumber()); // plunger flange
-        dc.drawLine(bx1, by1, (x + s).toNumber(), (y - s * 0.6).toNumber());                     // needle
+        var bw = (s * 1.05).toNumber();
+        var bh = (s * 0.7).toNumber();
+        var bx = (x - s * 0.35).toNumber();
+        var by = (y - bh / 2).toNumber();
+        dc.drawRoundedRectangle(bx, by, bw, bh, (2 * s / 14.0).toNumber());   // barrel
+        dc.drawLine((x - s).toNumber(), y.toNumber(), bx, y.toNumber());       // plunger rod
+        dc.drawLine((x - s).toNumber(), (y - s * 0.45).toNumber(), (x - s).toNumber(), (y + s * 0.45).toNumber()); // flange
+        dc.drawLine((bx + bw), y.toNumber(), (x + s).toNumber(), y.toNumber());// needle
         dc.setPenWidth(1);
     }
 
-    // Sensitivity: a small step-down (basal-profile-like) glyph ‾|_ .
-    function drawSensIcon(dc, x, y, s, color) as Void {
+    // TBR (temp basal): a square-wave "bump" — low · up · high · down · low.
+    function drawTbrIcon(dc, x, y, s, color) as Void {
         dc.setColor(color, Graphics.COLOR_TRANSPARENT);
-        var pw = (2 * s / 16.0).toNumber(); if (pw < 2) { pw = 2; }
+        var pw = (s / 7.0).toNumber(); if (pw < 2) { pw = 2; }
         dc.setPenWidth(pw);
-        var xl = (x - s).toNumber();
-        var xm = x.toNumber();
-        var xr = (x + s).toNumber();
-        var yt = (y - s * 0.6).toNumber();
-        var yb = (y + s * 0.6).toNumber();
-        dc.drawLine(xl, yt, xm, yt);
-        dc.drawLine(xm, yt, xm, yb);
-        dc.drawLine(xm, yb, xr, yb);
+        var xl  = (x - s).toNumber();
+        var xml = (x - s * 0.33).toNumber();
+        var xmr = (x + s * 0.33).toNumber();
+        var xr  = (x + s).toNumber();
+        var yb  = (y + s * 0.5).toNumber();
+        var yt  = (y - s * 0.55).toNumber();
+        dc.drawLine(xl, yb, xml, yb);
+        dc.drawLine(xml, yb, xml, yt);
+        dc.drawLine(xml, yt, xmr, yt);
+        dc.drawLine(xmr, yt, xmr, yb);
+        dc.drawLine(xmr, yb, xr, yb);
         dc.setPenWidth(1);
     }
 
@@ -284,7 +319,7 @@ class BoostFaceView extends WatchUi.WatchFace {
         if (fillW < 1 && pct > 0) { fillW = 1; }
         dc.setColor(col, Graphics.COLOR_TRANSPARENT);
         dc.fillRectangle(x0 + 2, y0 + 2, fillW, bh - 4);
-        dc.setColor(0x4FC3F7, Graphics.COLOR_TRANSPARENT);
+        dc.setColor(BLUE, Graphics.COLOR_TRANSPARENT);
         dc.drawText((x0 + bw + 10).toNumber(), y, Graphics.FONT_SMALL, pct.format("%d") + "%", LVC);
     }
 
