@@ -1,0 +1,41 @@
+{
+  "settings" : [ {
+    "key" : "aapsHost",
+    "valueType" : "string",
+    "defaultValue" : "127.0.0.1",
+    "configTitle" : "HostTitle",
+    "configPrompt" : null,
+    "configType" : "alphaNumeric",
+    "configError" : null,
+    "configHelpUrl" : null,
+    "configReadonly" : false,
+    "configRequired" : false,
+    "configOptions" : null,
+    "configMin" : null,
+    "configMax" : null,
+    "configMaxLength" : null
+  }, {
+    "key" : "aapsPort",
+    "valueType" : "number",
+    "defaultValue" : 28891,
+    "configTitle" : "PortTitle",
+    "configPrompt" : null,
+    "configType" : "numeric",
+    "configError" : null,
+    "configHelpUrl" : null,
+    "configReadonly" : false,
+    "configRequired" : false,
+    "configOptions" : null,
+    "configMin" : 1,
+    "configMax" : 65535,
+    "configMaxLength" : null
+  } ],
+  "supportsLiveValidation" : false,
+  "languages" : {
+    "valyrian" : {
+      "HostTitle" : "AAPS host (usually 127.0.0.1)",
+      "PortTitle" : "AAPS HTTP port (default 28891)",
+      "AppName" : "Boost Graph"
+    }
+  }
+}

@@ -1,0 +1,148 @@
+[ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Lang,1,14,18]; ]
+import Toybox.Lang;
+[ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc"; @line = 2; @symbol_usingdef<0> = [Toybox,2,6,12]; @symbol_usingdef<1> = [Application,2,13,24]; ]
+using Toybox.Application;
+[ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc"; @line = 3; @symbol_usingdef<0> = [Toybox,3,6,12]; @symbol_usingdef<1> = [WatchUi,3,13,20]; ]
+using Toybox.WatchUi;
+[ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc"; @line = 4; @symbol_usingdef<0> = [Toybox,4,6,12]; @symbol_usingdef<1> = [Background,4,13,23]; ]
+using Toybox.Background;
+[ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc"; @line = 5; @symbol_usingdef<0> = [Toybox,5,6,12]; @symbol_usingdef<1> = [Time,5,13,17]; ]
+using Toybox.Time;
+[ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc"; @line = 6; @symbol_usingdef<0> = [Toybox,6,6,12]; @symbol_usingdef<1> = [System,6,13,19]; ]
+using Toybox.System;
+[ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc"; @line = 14; background = true; @symbol_classdef = [BoostGarminApp,14,6,20]; @symbol_extends<0> = [Application,14,29,40]; @symbol_extends<1> = [AppBase,14,41,48]; ]
+class BoostGarminApp extends Application.AppBase {
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc"; @line = 14; ]
+    <init> {
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc"; @line = 14; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc"; @line = 16; @symbol_functiondef = [initialize,16,13,23]; ]
+    function initialize() as Void {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_16_26_18_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc" 17 8 ]
+        symbol [ AppBase %tmp.2 17 8 15 ];
+        %tmp.2 = getv ? :AppBase;
+        symbol [ initialize %tmp.3 17 16 26 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_16_26_18_4_stop:
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc"; @line = 20; @symbol_functiondef = [onStart,20,13,20]; @symbol_param<0> = [state,20,21,26]; @symbol_param<0>_type<0> = [Dictionary,20,30,40]; ]
+    function onStart(state as Dictionary or Null) as Void {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_20_51_22_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc" 21 8 ]
+        %tmp.1 = self;
+        symbol [ registerPull %tmp.2 21 8 20 ];
+        %tmp.2 = getv function %tmp.1 :registerPull;
+        invoke %tmp.1 %tmp.2();
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_20_51_22_4_stop:
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc"; @line = 24; @symbol_functiondef = [onStop,24,13,19]; @symbol_param<0> = [state,24,20,25]; @symbol_param<0>_type<0> = [Dictionary,24,29,39]; ]
+    function onStop(state as Dictionary or Null) as Void {
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc"; @line = 29; @symbol_functiondef = [registerPull,29,13,25]; ]
+    function registerPull() as Void {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_29_36_33_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc" 30 8 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_30_8_32_8_if_stmt:
+        symbol [ Toybox %tmp.2 30 12 18 ];
+        %tmp.2 = getv ? :Toybox;
+        %tmp.4 = const :Background;
+        symbol [ Background %tmp.4 30 24 34 const ];
+        %tmp.5 = canhazplz %tmp.2 %tmp.4;
+        bf %tmp.5 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_30_8_32_8_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_30_8_32_8_if_true:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_30_36_32_8_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc" 31 12 ]
+        symbol [ Background %tmp.6 31 12 22 ];
+        %tmp.6 = getm $.Toybox.Background;
+        symbol [ registerForTemporalEvent %tmp.7 31 23 47 ];
+        %tmp.7 = getv function %tmp.6 :registerForTemporalEvent;
+        symbol [ Time %tmp.10 31 52 56 ];
+        %tmp.10 = getm $.Toybox.Time;
+        symbol [ Duration %tmp.11 31 57 65 ];
+        %tmp.11 = getv function ? %tmp.10 :Duration;
+        %tmp.12 = 300;
+        %tmp.8 = newc %tmp.11 (%tmp.12);
+        invoke %tmp.6 %tmp.7(%tmp.8);
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_30_36_32_8_stop:
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_30_8_32_8_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_30_8_32_8_if_end:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_29_36_33_4_stop:
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc"; @line = 36; @symbol_functiondef = [getInitialView,36,13,27]; ]
+    function getInitialView() {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_36_30_38_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc" 37 8 ]
+        %tmp.1 = newa 1;
+        symbol [ BoostFaceView %tmp.5 37 21 34 ];
+        %tmp.5 = getv ? :BoostFaceView;
+        %tmp.2 = newc %tmp.5 ();
+        %tmp.6 = dup %tmp.1;
+        %tmp.7 = aputv %tmp.6 0 %tmp.2;
+        ret %tmp.7;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_36_30_38_4_stop:
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc"; @line = 41; @symbol_functiondef = [getServiceDelegate,41,13,31]; ]
+    function getServiceDelegate() {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_41_34_43_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc" 42 8 ]
+        %tmp.1 = newa 1;
+        symbol [ BgService %tmp.5 42 21 30 ];
+        %tmp.5 = getv ? :BgService;
+        %tmp.2 = newc %tmp.5 ();
+        %tmp.6 = dup %tmp.1;
+        %tmp.7 = aputv %tmp.6 0 %tmp.2;
+        ret %tmp.7;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_41_34_43_4_stop:
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc"; @line = 46; @symbol_functiondef = [onBackgroundData,46,13,29]; @symbol_param<0> = [data,46,30,34]; ]
+    function onBackgroundData(data) as Void {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_46_44_51_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc" 47 8 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_47_8_50_8_if_stmt:
+        %tmp.1 = lgetv %data;
+        symbol [ data %tmp.1 47 12 16 ];
+        %tmp.2 = null;
+        %tmp.3 = ne %tmp.1 %tmp.2;
+        bf %tmp.3 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_47_8_50_8_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_47_8_50_8_if_true:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_47_26_50_8_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc" 48 12 ]
+        symbol [ BoostData %tmp.5 48 12 21 ];
+        %tmp.5 = getv ? :BoostData;
+        symbol [ store %tmp.6 48 22 27 ];
+        %tmp.6 = getv function %tmp.5 :store;
+        %tmp.7 = lgetv %data;
+        symbol [ data %tmp.7 48 28 32 ];
+        %tmp.8 = as %tmp.7 { (!Null) };
+        invoke %tmp.5 %tmp.6(%tmp.8);
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc" 49 12 ]
+        symbol [ WatchUi %tmp.9 49 12 19 ];
+        %tmp.9 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.10 49 20 33 ];
+        %tmp.10 = getv function %tmp.9 :requestUpdate;
+        invoke %tmp.9 %tmp.10();
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_47_26_50_8_stop:
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_47_8_50_8_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_47_8_50_8_if_end:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_46_44_51_4_stop:
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc"; @line = 53; @symbol_functiondef = [onSettingsChanged,53,13,30]; ]
+    function onSettingsChanged() as Void {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_53_41_56_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc" 55 8 ]
+        symbol [ WatchUi %tmp.1 55 8 15 ];
+        %tmp.1 = getm $.Toybox.WatchUi;
+        symbol [ requestUpdate %tmp.2 55 16 29 ];
+        %tmp.2 = getv function %tmp.1 :requestUpdate;
+        invoke %tmp.1 %tmp.2();
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BoostGarminApp_mc_53_41_56_4_stop:
+    }
+}
+[ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BoostGarminApp.mc"; @line = 1; ]
+<init> {
+}

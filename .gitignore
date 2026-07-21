@@ -1,0 +1,7 @@
+boost.prg
+boost.prg.debug.xml
+boost.iq
+gen/
+bin/
+*.der
+.DS_Store

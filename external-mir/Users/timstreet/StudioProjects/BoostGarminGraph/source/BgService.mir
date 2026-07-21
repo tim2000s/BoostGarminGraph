@@ -1,0 +1,1543 @@
+[ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 1; @symbol_importdef<0> = [Toybox,1,7,13]; @symbol_importdef<1> = [Lang,1,14,18]; ]
+import Toybox.Lang;
+[ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 2; @symbol_usingdef<0> = [Toybox,2,6,12]; @symbol_usingdef<1> = [System,2,13,19]; ]
+using Toybox.System;
+[ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 3; @symbol_usingdef<0> = [Toybox,3,6,12]; @symbol_usingdef<1> = [Background,3,13,23]; ]
+using Toybox.Background;
+[ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 4; @symbol_usingdef<0> = [Toybox,4,6,12]; @symbol_usingdef<1> = [Communications,4,13,27]; ]
+using Toybox.Communications;
+[ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 5; @symbol_usingdef<0> = [Toybox,5,6,12]; @symbol_usingdef<1> = [Application,5,13,24]; ]
+using Toybox.Application;
+[ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 6; @symbol_usingdef<0> = [Toybox,6,6,12]; @symbol_usingdef<1> = [Time,6,13,17]; ]
+using Toybox.Time;
+[ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 7; @symbol_usingdef<0> = [Toybox,7,6,12]; @symbol_usingdef<1> = [PersistedContent,7,13,29]; ]
+using Toybox.PersistedContent;
+[ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 8; @symbol_usingdef<0> = [Toybox,8,6,12]; @symbol_usingdef<1> = [ActivityMonitor,8,13,28]; ]
+using Toybox.ActivityMonitor;
+[ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 18; background = true; @symbol_classdef = [BgService,18,6,15]; @symbol_extends<0> = [System,18,24,30]; @symbol_extends<1> = [ServiceDelegate,18,31,46]; ]
+class BgService extends System.ServiceDelegate {
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 18; ]
+    <init> {
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 18; ]
+    static
+    <init> {
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 20; @symbol_functiondef = [initialize,20,13,23]; ]
+    function initialize() as Void {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_20_26_22_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 21 8 ]
+        symbol [ ServiceDelegate %tmp.2 21 8 23 ];
+        %tmp.2 = getv ? :ServiceDelegate;
+        symbol [ initialize %tmp.3 21 24 34 ];
+        %tmp.3 = getv function %tmp.2 :initialize;
+        invoke %tmp.2 %tmp.3();
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_20_26_22_4_stop:
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 27; @symbol_functiondef = [onTemporalEvent,27,13,28]; ]
+    function onTemporalEvent() as Void {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_27_39_29_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 28 8 ]
+        %tmp.1 = self;
+        symbol [ sendHeartRatesThenFetchBg %tmp.2 28 8 33 ];
+        %tmp.2 = getv function %tmp.1 :sendHeartRatesThenFetchBg;
+        invoke %tmp.1 %tmp.2();
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_27_39_29_4_stop:
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 31; @symbol_functiondef = [base,31,13,17]; @symbol_return<0> = [String,31,23,29]; ]
+    function base() as String {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_31_30_33_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 32 8 ]
+        %tmp.1 = "http://";
+        symbol [ BoostData %tmp.3 32 27 36 ];
+        %tmp.3 = getv ? :BoostData;
+        symbol [ host %tmp.4 32 37 41 ];
+        %tmp.4 = getv function %tmp.3 :host;
+        %tmp.5 = invoke %tmp.3 %tmp.4();
+        %tmp.6 = add %tmp.1 %tmp.5;
+        %tmp.7 = ":";
+        %tmp.8 = add %tmp.6 %tmp.7;
+        symbol [ BoostData %tmp.10 32 52 61 ];
+        %tmp.10 = getv ? :BoostData;
+        symbol [ port %tmp.11 32 62 66 ];
+        %tmp.11 = getv function %tmp.10 :port;
+        %tmp.12 = invoke %tmp.10 %tmp.11();
+        symbol [ toString %tmp.13 32 69 77 ];
+        %tmp.13 = getv function %tmp.12 :toString;
+        %tmp.14 = invoke %tmp.12 %tmp.13();
+        %tmp.15 = add %tmp.8 %tmp.14;
+        ret %tmp.15;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_31_30_33_4_stop:
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 37; @symbol_functiondef = [sendHeartRatesThenFetchBg,37,13,38]; ]
+    function sendHeartRatesThenFetchBg() as Void {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_37_49_46_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 38 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_37_49_46_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_37_49_46_4_stop" ]
+        %samples.1 = local;
+        symbol [ samples %samples.1 38 12 19 ];
+        %tmp.1 = self;
+        symbol [ readHrSamples %tmp.2 38 22 35 ];
+        %tmp.2 = getv function %tmp.1 :readHrSamples;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %samples.1 %tmp.3;
+        symbol [ samples %samples.1 38 12 19 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 39 8 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_39_8_45_8_if_stmt:
+        %tmp.4 = lgetv %samples.1;
+        symbol [ samples %tmp.4 39 12 19 ];
+        symbol [ length %tmp.5 39 20 26 ];
+        %tmp.5 = getv function %tmp.4 :length;
+        %tmp.6 = invoke %tmp.4 %tmp.5();
+        %tmp.7 = 0;
+        %tmp.8 = gt %tmp.6 %tmp.7;
+        bf %tmp.8 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_39_8_45_8_if_else_false;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_39_8_45_8_if_true:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_39_34_43_8_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 40 12 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_39_34_43_8_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_39_34_43_8_stop" ]
+        %options.2 = local;
+        symbol [ options %options.2 40 16 23 ];
+        %tmp.9 = newd 1;
+        %tmp.11 = const :method;
+        symbol [ method %tmp.11 40 29 35 const ];
+        symbol [ Communications %tmp.12 40 39 53 ];
+        %tmp.12 = getm $.Toybox.Communications;
+        symbol [ HTTP_REQUEST_METHOD_GET %tmp.13 40 54 77 ];
+        %tmp.13 = getv %tmp.12 :HTTP_REQUEST_METHOD_GET;
+        %tmp.14 = dup %tmp.9;
+        %tmp.15 = aputv %tmp.14 %tmp.11 %tmp.13;
+        lputv %options.2 %tmp.15;
+        symbol [ options %options.2 40 16 23 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 41 12 ]
+        symbol [ Communications %tmp.16 41 12 26 ];
+        %tmp.16 = getm $.Toybox.Communications;
+        symbol [ makeWebRequest %tmp.17 41 27 41 ];
+        %tmp.17 = getv function %tmp.16 :makeWebRequest;
+        %tmp.18 = self;
+        symbol [ base %tmp.19 41 42 46 ];
+        %tmp.19 = getv function %tmp.18 :base;
+        %tmp.20 = invoke %tmp.18 %tmp.19();
+        %tmp.21 = "/hr";
+        %tmp.22 = add %tmp.20 %tmp.21;
+        %tmp.23 = newd 2;
+        %tmp.24 = "device";
+        %tmp.25 = "venu3";
+        %tmp.26 = dup %tmp.23;
+        %tmp.27 = aputv %tmp.26 %tmp.24 %tmp.25;
+        %tmp.28 = "samples";
+        %tmp.29 = lgetv %samples.1;
+        symbol [ samples %tmp.29 42 52 59 ];
+        %tmp.30 = dup %tmp.27;
+        %tmp.31 = aputv %tmp.30 %tmp.28 %tmp.29;
+        %tmp.32 = lgetv %options.2;
+        symbol [ options %tmp.32 42 63 70 ];
+        %tmp.33 = self;
+        symbol [ method %tmp.34 42 72 78 ];
+        %tmp.34 = getv function %tmp.33 :method;
+        %tmp.36 = const :onHrSent;
+        symbol [ onHrSent %tmp.36 42 80 88 const ];
+        %tmp.37 = invoke %tmp.33 %tmp.34(%tmp.36);
+        invoke %tmp.16 %tmp.17(%tmp.22, %tmp.31, %tmp.32, %tmp.37);
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_39_34_43_8_stop:
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_39_8_45_8_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_39_8_45_8_if_else_false:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_43_15_45_8_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 44 12 ]
+        %tmp.38 = self;
+        symbol [ fetchBg %tmp.39 44 12 19 ];
+        %tmp.39 = getv function %tmp.38 :fetchBg;
+        invoke %tmp.38 %tmp.39();
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_43_15_45_8_stop:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_39_8_45_8_if_end:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_37_49_46_4_stop:
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 49; @symbol_functiondef = [onHrSent,49,13,21]; @symbol_param<0> = [code,49,22,26]; @symbol_param<0>_type<0> = [Number,49,30,36]; @symbol_param<1> = [data,49,38,42]; @symbol_param<1>_type<0> = [Dictionary,49,54,64]; @symbol_param<1>_type<1> = [String,49,68,74]; @symbol_param<1>_type<2> = [PersistedContent,49,78,94]; @symbol_param<1>_type<3> = [Iterator,49,95,103]; ]
+    function onHrSent(code as Number, data as Null or Dictionary or String or PersistedContent.Iterator) as Void {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_49_113_51_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 50 8 ]
+        %tmp.1 = self;
+        symbol [ sendStepsThenFetchBg %tmp.2 50 8 28 ];
+        %tmp.2 = getv function %tmp.1 :sendStepsThenFetchBg;
+        invoke %tmp.1 %tmp.2();
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_49_113_51_4_stop:
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 56; @symbol_functiondef = [sendStepsThenFetchBg,56,13,33]; ]
+    function sendStepsThenFetchBg() as Void {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_56_44_91_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 57 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_56_44_91_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_56_44_91_4_stop" ]
+        %info.1 = local;
+        symbol [ info %info.1 57 12 16 ];
+        symbol [ ActivityMonitor %tmp.1 57 19 34 ];
+        %tmp.1 = getm $.Toybox.ActivityMonitor;
+        symbol [ getInfo %tmp.2 57 35 42 ];
+        %tmp.2 = getv function %tmp.1 :getInfo;
+        %tmp.3 = invoke %tmp.1 %tmp.2();
+        lputv %info.1 %tmp.3;
+        symbol [ info %info.1 57 12 16 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 58 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_56_44_91_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_56_44_91_4_stop" ]
+        %cum.2 = local;
+        symbol [ cum %cum.2 58 12 15 ];
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_58_18_58_70_begin:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_58_19_58_49_begin:
+        %tmp.4 = lgetv %info.1;
+        symbol [ info %tmp.4 58 19 23 ];
+        %tmp.5 = null;
+        %tmp.6 = ne %tmp.4 %tmp.5;
+        bf %tmp.6 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_58_18_58_70_else_false;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_58_35_58_49_true:
+        %tmp.7 = lgetv %info.1;
+        symbol [ info %tmp.7 58 35 39 ];
+        %tmp.8 = as %tmp.7 { (!Null) };
+        symbol [ steps %tmp.9 58 40 45 ];
+        %tmp.9 = getv %tmp.8 :steps;
+        %tmp.10 = null;
+        %tmp.11 = ne %tmp.9 %tmp.10;
+        push %tmp.11;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_58_35_58_49_end:
+        %tmp.12 = phi [%tmp.6 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_58_19_58_49_begin] [%tmp.11 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_58_35_58_49_true] [%tmp.12 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_58_35_58_49_end];
+        bf %tmp.12 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_58_18_58_70_else_false;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_58_18_58_70_true:
+        %tmp.13 = lgetv %info.1;
+        symbol [ info %tmp.13 58 57 61 ];
+        %tmp.14 = as %tmp.13 { (!Null) };
+        symbol [ steps %tmp.15 58 62 67 ];
+        %tmp.15 = getv %tmp.14 :steps;
+        push %tmp.15;
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_58_18_58_70_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_58_18_58_70_else_false:
+        %tmp.16 = null;
+        push %tmp.16;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_58_18_58_70_end:
+        %tmp.17 = phi [%tmp.12 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_58_18_58_70_begin] [%tmp.15 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_58_18_58_70_true] [%tmp.16 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_58_18_58_70_else_false] [%tmp.17 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_58_18_58_70_end];
+        lputv %cum.2 %tmp.17;
+        symbol [ cum %cum.2 58 12 15 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 59 8 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_59_8_59_46_if_stmt:
+        %tmp.18 = lgetv %cum.2;
+        symbol [ cum %tmp.18 59 12 15 ];
+        %tmp.19 = null;
+        %tmp.20 = eq %tmp.18 %tmp.19;
+        bf %tmp.20 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_59_8_59_46_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_59_8_59_46_if_true:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_59_25_59_46_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 59 27 ]
+        %tmp.21 = self;
+        symbol [ fetchBg %tmp.22 59 27 34 ];
+        %tmp.22 = getv function %tmp.21 :fetchBg;
+        invoke %tmp.21 %tmp.22();
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 59 38 ]
+        ret ?;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_59_25_59_46_stop:
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_59_8_59_46_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_59_8_59_46_if_end:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 60 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_56_44_91_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_56_44_91_4_stop" ]
+        %nowSec.3 = local;
+        symbol [ nowSec %nowSec.3 60 12 18 ];
+        symbol [ Time %tmp.23 60 21 25 ];
+        %tmp.23 = getm $.Toybox.Time;
+        symbol [ now %tmp.24 60 26 29 ];
+        %tmp.24 = getv function %tmp.23 :now;
+        %tmp.25 = invoke %tmp.23 %tmp.24();
+        symbol [ value %tmp.26 60 32 37 ];
+        %tmp.26 = getv function %tmp.25 :value;
+        %tmp.27 = invoke %tmp.25 %tmp.26();
+        lputv %nowSec.3 %tmp.27;
+        symbol [ nowSec %nowSec.3 60 12 18 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 62 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_56_44_91_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_56_44_91_4_stop" ]
+        %buf.4 = local;
+        symbol [ buf %buf.4 62 12 15 ];
+        symbol [ Application %tmp.28 62 18 29 ];
+        %tmp.28 = getm $.Toybox.Application;
+        symbol [ Storage %tmp.29 62 30 37 ];
+        %tmp.29 = getv %tmp.28 :Storage;
+        symbol [ getValue %tmp.30 62 38 46 ];
+        %tmp.30 = getv function %tmp.29 :getValue;
+        %tmp.31 = "stepBuf";
+        %tmp.32 = invoke %tmp.29 %tmp.30(%tmp.31);
+        lputv %buf.4 %tmp.32;
+        symbol [ buf %buf.4 62 12 15 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 63 8 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_63_8_63_49_if_stmt:
+        %tmp.33 = lgetv %buf.4;
+        symbol [ buf %tmp.33 63 14 17 ];
+        symbol [ Array %tmp.35 63 29 34 ];
+        %tmp.35 = getv ? :Array;
+        %tmp.36 = isa %tmp.33 %tmp.35;
+        %tmp.37 = not %tmp.36;
+        bf %tmp.37 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_63_8_63_49_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_63_8_63_49_if_true:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_63_37_63_49_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 63 39 ]
+        %tmp.38 = newa 0;
+        lputv %buf.4 %tmp.38;
+        symbol [ buf %buf.4 63 39 42 ];
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_63_37_63_49_stop:
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_63_8_63_49_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_63_8_63_49_if_end:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 64 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_56_44_91_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_56_44_91_4_stop" ]
+        %cutoff.5 = local;
+        symbol [ cutoff %cutoff.5 64 12 18 ];
+        %tmp.39 = lgetv %nowSec.3;
+        symbol [ nowSec %tmp.39 64 21 27 ];
+        %tmp.40 = 180;
+        %tmp.41 = 60;
+        %tmp.42 = mul %tmp.40 %tmp.41;
+        %tmp.43 = sub %tmp.39 %tmp.42;
+        lputv %cutoff.5 %tmp.43;
+        symbol [ cutoff %cutoff.5 64 12 18 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 65 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_56_44_91_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_56_44_91_4_stop" ]
+        %pruned.6 = local;
+        symbol [ pruned %pruned.6 65 12 18 ];
+        %tmp.44 = newa 0;
+        lputv %pruned.6 %tmp.44;
+        symbol [ pruned %pruned.6 65 12 18 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 66 8 ]
+        for @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_66_8_68_8_for_test @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_66_8_68_8_for_incr @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_66_8_68_8_for_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_66_8_68_8_for_init:
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_66_8_68_8_for_begin" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_66_8_68_8_for_end" ]
+        %i.7 = local;
+        symbol [ i %i.7 66 17 18 ];
+        %tmp.45 = 0;
+        lputv %i.7 %tmp.45;
+        symbol [ i %i.7 66 17 18 ];
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_66_8_68_8_for_test:
+        %tmp.46 = lgetv %i.7;
+        symbol [ i %tmp.46 66 24 25 ];
+        %tmp.47 = lgetv %buf.4;
+        symbol [ buf %tmp.47 66 28 31 ];
+        symbol [ size %tmp.48 66 32 36 ];
+        %tmp.48 = getv function %tmp.47 :size;
+        %tmp.49 = invoke %tmp.47 %tmp.48();
+        %tmp.50 = lt %tmp.46 %tmp.49;
+        bf %tmp.50 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_66_8_68_8_for_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_66_8_68_8_for_begin:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_66_45_68_8_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 67 12 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_67_12_67_86_if_stmt:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_67_16_67_56_begin:
+        %tmp.51 = lgetv %buf.4;
+        symbol [ buf %tmp.51 67 16 19 ];
+        %tmp.52 = lgetv %i.7;
+        symbol [ i %tmp.52 67 20 21 ];
+        %tmp.53 = agetv %tmp.51 %tmp.52;
+        symbol [ Array %tmp.55 67 34 39 ];
+        %tmp.55 = getv ? :Array;
+        %tmp.56 = isa %tmp.53 %tmp.55;
+        bf %tmp.56 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_67_12_67_86_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_67_43_67_56_true:
+        %tmp.57 = lgetv %buf.4;
+        symbol [ buf %tmp.57 67 43 46 ];
+        %tmp.58 = lgetv %i.7;
+        symbol [ i %tmp.58 67 47 48 ];
+        %tmp.59 = agetv %tmp.57 %tmp.58;
+        %tmp.60 = 0;
+        %tmp.61 = agetv %tmp.59 %tmp.60;
+        %tmp.62 = lgetv %cutoff.5;
+        symbol [ cutoff %tmp.62 67 56 62 ];
+        %tmp.63 = gte %tmp.61 %tmp.62;
+        push %tmp.63;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_67_43_67_56_end:
+        %tmp.64 = phi [%tmp.56 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_67_16_67_56_begin] [%tmp.63 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_67_43_67_56_true] [%tmp.64 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_67_43_67_56_end];
+        bf %tmp.64 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_67_12_67_86_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_67_12_67_86_if_true:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_67_64_67_86_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 67 66 ]
+        %tmp.65 = lgetv %pruned.6;
+        symbol [ pruned %tmp.65 67 66 72 ];
+        symbol [ add %tmp.66 67 73 76 ];
+        %tmp.66 = getv function %tmp.65 :add;
+        %tmp.67 = lgetv %buf.4;
+        symbol [ buf %tmp.67 67 77 80 ];
+        %tmp.68 = lgetv %i.7;
+        symbol [ i %tmp.68 67 81 82 ];
+        %tmp.69 = agetv %tmp.67 %tmp.68;
+        invoke %tmp.65 %tmp.66(%tmp.69);
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_67_64_67_86_stop:
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_67_12_67_86_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_67_12_67_86_if_end:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_66_45_68_8_stop:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_66_8_68_8_for_incr:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 66 ]
+        %tmp.72 = lgetv %i.7;
+        symbol [ i %tmp.72 66 40 41 ];
+        %tmp.73 = add %tmp.72 1;
+        lputv %i.7 %tmp.73;
+        symbol [ i %i.7 66 40 41 ];
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_66_8_68_8_for_test;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_66_8_68_8_for_end:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 69 8 ]
+        %tmp.74 = lgetv %pruned.6;
+        symbol [ pruned %tmp.74 69 14 20 ];
+        lputv %buf.4 %tmp.74;
+        symbol [ buf %buf.4 69 8 11 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 71 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_56_44_91_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_56_44_91_4_stop" ]
+        %params.8 = local;
+        symbol [ params %params.8 71 12 18 ];
+        %tmp.75 = newd 8;
+        %tmp.76 = "device";
+        %tmp.77 = "venu3";
+        %tmp.78 = dup %tmp.75;
+        %tmp.79 = aputv %tmp.78 %tmp.76 %tmp.77;
+        %tmp.80 = "t";
+        %tmp.81 = lgetv %nowSec.3;
+        symbol [ nowSec %tmp.81 72 40 46 ];
+        %tmp.82 = dup %tmp.79;
+        %tmp.83 = aputv %tmp.82 %tmp.80 %tmp.81;
+        %tmp.84 = "s5";
+        %tmp.85 = self;
+        symbol [ stepsSincePrev %tmp.86 79 21 35 ];
+        %tmp.86 = getv function %tmp.85 :stepsSincePrev;
+        %tmp.87 = lgetv %buf.4;
+        symbol [ buf %tmp.87 79 36 39 ];
+        %tmp.88 = lgetv %cum.2;
+        symbol [ cum %tmp.88 79 41 44 ];
+        %tmp.89 = lgetv %nowSec.3;
+        symbol [ nowSec %tmp.89 79 46 52 ];
+        %tmp.90 = 15;
+        %tmp.91 = invoke %tmp.85 %tmp.86(%tmp.87, %tmp.88, %tmp.89, %tmp.90);
+        %tmp.92 = dup %tmp.83;
+        %tmp.93 = aputv %tmp.92 %tmp.84 %tmp.91;
+        %tmp.94 = "s10";
+        %tmp.95 = self;
+        symbol [ deltaOver %tmp.96 80 21 30 ];
+        %tmp.96 = getv function %tmp.95 :deltaOver;
+        %tmp.97 = lgetv %buf.4;
+        symbol [ buf %tmp.97 80 31 34 ];
+        %tmp.98 = lgetv %cum.2;
+        symbol [ cum %tmp.98 80 36 39 ];
+        %tmp.99 = lgetv %nowSec.3;
+        symbol [ nowSec %tmp.99 80 41 47 ];
+        %tmp.100 = 10;
+        %tmp.101 = invoke %tmp.95 %tmp.96(%tmp.97, %tmp.98, %tmp.99, %tmp.100);
+        %tmp.102 = dup %tmp.93;
+        %tmp.103 = aputv %tmp.102 %tmp.94 %tmp.101;
+        %tmp.104 = "s15";
+        %tmp.105 = self;
+        symbol [ deltaOver %tmp.106 81 21 30 ];
+        %tmp.106 = getv function %tmp.105 :deltaOver;
+        %tmp.107 = lgetv %buf.4;
+        symbol [ buf %tmp.107 81 31 34 ];
+        %tmp.108 = lgetv %cum.2;
+        symbol [ cum %tmp.108 81 36 39 ];
+        %tmp.109 = lgetv %nowSec.3;
+        symbol [ nowSec %tmp.109 81 41 47 ];
+        %tmp.110 = 15;
+        %tmp.111 = invoke %tmp.105 %tmp.106(%tmp.107, %tmp.108, %tmp.109, %tmp.110);
+        %tmp.112 = dup %tmp.103;
+        %tmp.113 = aputv %tmp.112 %tmp.104 %tmp.111;
+        %tmp.114 = "s30";
+        %tmp.115 = self;
+        symbol [ deltaOver %tmp.116 82 21 30 ];
+        %tmp.116 = getv function %tmp.115 :deltaOver;
+        %tmp.117 = lgetv %buf.4;
+        symbol [ buf %tmp.117 82 31 34 ];
+        %tmp.118 = lgetv %cum.2;
+        symbol [ cum %tmp.118 82 36 39 ];
+        %tmp.119 = lgetv %nowSec.3;
+        symbol [ nowSec %tmp.119 82 41 47 ];
+        %tmp.120 = 30;
+        %tmp.121 = invoke %tmp.115 %tmp.116(%tmp.117, %tmp.118, %tmp.119, %tmp.120);
+        %tmp.122 = dup %tmp.113;
+        %tmp.123 = aputv %tmp.122 %tmp.114 %tmp.121;
+        %tmp.124 = "s60";
+        %tmp.125 = self;
+        symbol [ deltaOver %tmp.126 83 21 30 ];
+        %tmp.126 = getv function %tmp.125 :deltaOver;
+        %tmp.127 = lgetv %buf.4;
+        symbol [ buf %tmp.127 83 31 34 ];
+        %tmp.128 = lgetv %cum.2;
+        symbol [ cum %tmp.128 83 36 39 ];
+        %tmp.129 = lgetv %nowSec.3;
+        symbol [ nowSec %tmp.129 83 41 47 ];
+        %tmp.130 = 60;
+        %tmp.131 = invoke %tmp.125 %tmp.126(%tmp.127, %tmp.128, %tmp.129, %tmp.130);
+        %tmp.132 = dup %tmp.123;
+        %tmp.133 = aputv %tmp.132 %tmp.124 %tmp.131;
+        %tmp.134 = "s180";
+        %tmp.135 = self;
+        symbol [ deltaOver %tmp.136 84 21 30 ];
+        %tmp.136 = getv function %tmp.135 :deltaOver;
+        %tmp.137 = lgetv %buf.4;
+        symbol [ buf %tmp.137 84 31 34 ];
+        %tmp.138 = lgetv %cum.2;
+        symbol [ cum %tmp.138 84 36 39 ];
+        %tmp.139 = lgetv %nowSec.3;
+        symbol [ nowSec %tmp.139 84 41 47 ];
+        %tmp.140 = 180;
+        %tmp.141 = invoke %tmp.135 %tmp.136(%tmp.137, %tmp.138, %tmp.139, %tmp.140);
+        %tmp.142 = dup %tmp.133;
+        %tmp.143 = aputv %tmp.142 %tmp.134 %tmp.141;
+        lputv %params.8 %tmp.143;
+        symbol [ params %params.8 71 12 18 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 86 8 ]
+        %tmp.144 = lgetv %buf.4;
+        symbol [ buf %tmp.144 86 8 11 ];
+        symbol [ add %tmp.145 86 12 15 ];
+        %tmp.145 = getv function %tmp.144 :add;
+        %tmp.146 = newa 2;
+        %tmp.147 = lgetv %nowSec.3;
+        symbol [ nowSec %tmp.147 86 17 23 ];
+        %tmp.148 = dup %tmp.146;
+        %tmp.149 = aputv %tmp.148 0 %tmp.147;
+        %tmp.150 = lgetv %cum.2;
+        symbol [ cum %tmp.150 86 25 28 ];
+        %tmp.151 = dup %tmp.149;
+        %tmp.152 = aputv %tmp.151 1 %tmp.150;
+        invoke %tmp.144 %tmp.145(%tmp.152);
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 87 8 ]
+        symbol [ Application %tmp.153 87 8 19 ];
+        %tmp.153 = getm $.Toybox.Application;
+        symbol [ Storage %tmp.154 87 20 27 ];
+        %tmp.154 = getv %tmp.153 :Storage;
+        symbol [ setValue %tmp.155 87 28 36 ];
+        %tmp.155 = getv function %tmp.154 :setValue;
+        %tmp.156 = "stepBuf";
+        %tmp.157 = lgetv %buf.4;
+        symbol [ buf %tmp.157 87 48 51 ];
+        invoke %tmp.154 %tmp.155(%tmp.156, %tmp.157);
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 89 8 ]
+        symbol [ Communications %tmp.158 89 8 22 ];
+        %tmp.158 = getm $.Toybox.Communications;
+        symbol [ makeWebRequest %tmp.159 89 23 37 ];
+        %tmp.159 = getv function %tmp.158 :makeWebRequest;
+        %tmp.160 = self;
+        symbol [ base %tmp.161 89 38 42 ];
+        %tmp.161 = getv function %tmp.160 :base;
+        %tmp.162 = invoke %tmp.160 %tmp.161();
+        %tmp.163 = "/steps";
+        %tmp.164 = add %tmp.162 %tmp.163;
+        %tmp.165 = lgetv %params.8;
+        symbol [ params %tmp.165 89 57 63 ];
+        %tmp.166 = newd 1;
+        %tmp.168 = const :method;
+        symbol [ method %tmp.168 90 15 21 const ];
+        symbol [ Communications %tmp.169 90 25 39 ];
+        %tmp.169 = getm $.Toybox.Communications;
+        symbol [ HTTP_REQUEST_METHOD_GET %tmp.170 90 40 63 ];
+        %tmp.170 = getv %tmp.169 :HTTP_REQUEST_METHOD_GET;
+        %tmp.171 = dup %tmp.166;
+        %tmp.172 = aputv %tmp.171 %tmp.168 %tmp.170;
+        %tmp.173 = self;
+        symbol [ method %tmp.174 90 67 73 ];
+        %tmp.174 = getv function %tmp.173 :method;
+        %tmp.176 = const :onStepsSent;
+        symbol [ onStepsSent %tmp.176 90 75 86 const ];
+        %tmp.177 = invoke %tmp.173 %tmp.174(%tmp.176);
+        invoke %tmp.158 %tmp.159(%tmp.164, %tmp.165, %tmp.172, %tmp.177);
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_56_44_91_4_stop:
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 93; @symbol_functiondef = [onStepsSent,93,13,24]; @symbol_param<0> = [code,93,25,29]; @symbol_param<0>_type<0> = [Number,93,33,39]; @symbol_param<1> = [data,93,41,45]; @symbol_param<1>_type<0> = [Dictionary,93,57,67]; @symbol_param<1>_type<1> = [String,93,71,77]; @symbol_param<1>_type<2> = [PersistedContent,93,81,97]; @symbol_param<1>_type<3> = [Iterator,93,98,106]; ]
+    function onStepsSent(code as Number, data as Null or Dictionary or String or PersistedContent.Iterator) as Void {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_93_116_95_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 94 8 ]
+        %tmp.1 = self;
+        symbol [ fetchBg %tmp.2 94 8 15 ];
+        %tmp.2 = getv function %tmp.1 :fetchBg;
+        invoke %tmp.1 %tmp.2();
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_93_116_95_4_stop:
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 102; @symbol_functiondef = [stepsSincePrev,102,13,27]; @symbol_param<0> = [buf,102,28,31]; @symbol_param<0>_type<0> = [Array,102,35,40]; @symbol_param<1> = [cum,102,42,45]; @symbol_param<1>_type<0> = [Number,102,49,55]; @symbol_param<2> = [nowSec,102,57,63]; @symbol_param<2>_type<0> = [Number,102,67,73]; @symbol_param<3> = [graceMin,102,75,83]; @symbol_param<3>_type<0> = [Number,102,87,93]; @symbol_return<0> = [Number,102,98,104]; ]
+    function stepsSincePrev(buf as Array, cum as Number, nowSec as Number, graceMin as Number) as Number {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_102_105_115_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 103 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_102_105_115_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_102_105_115_4_stop" ]
+        %cutoff.1 = local;
+        symbol [ cutoff %cutoff.1 103 12 18 ];
+        %tmp.1 = lgetv %nowSec;
+        symbol [ nowSec %tmp.1 103 21 27 ];
+        %tmp.2 = lgetv %graceMin;
+        symbol [ graceMin %tmp.2 103 30 38 ];
+        %tmp.3 = 60;
+        %tmp.4 = mul %tmp.2 %tmp.3;
+        %tmp.5 = sub %tmp.1 %tmp.4;
+        lputv %cutoff.1 %tmp.5;
+        symbol [ cutoff %cutoff.1 103 12 18 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 104 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_102_105_115_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_102_105_115_4_stop" ]
+        %base.2 = local;
+        symbol [ base %base.2 104 12 16 ];
+        %tmp.6 = null;
+        lputv %base.2 %tmp.6;
+        symbol [ base %base.2 104 12 16 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 105 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_102_105_115_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_102_105_115_4_stop" ]
+        %baseT.3 = local;
+        symbol [ baseT %baseT.3 105 12 17 ];
+        %tmp.7 = null;
+        lputv %baseT.3 %tmp.7;
+        symbol [ baseT %baseT.3 105 12 17 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 106 8 ]
+        for @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_106_8_111_8_for_test @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_106_8_111_8_for_incr @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_106_8_111_8_for_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_106_8_111_8_for_init:
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_106_8_111_8_for_begin" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_106_8_111_8_for_end" ]
+        %i.4 = local;
+        symbol [ i %i.4 106 17 18 ];
+        %tmp.8 = 0;
+        lputv %i.4 %tmp.8;
+        symbol [ i %i.4 106 17 18 ];
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_106_8_111_8_for_test:
+        %tmp.9 = lgetv %i.4;
+        symbol [ i %tmp.9 106 24 25 ];
+        %tmp.10 = lgetv %buf;
+        symbol [ buf %tmp.10 106 28 31 ];
+        symbol [ size %tmp.11 106 32 36 ];
+        %tmp.11 = getv function %tmp.10 :size;
+        %tmp.12 = invoke %tmp.10 %tmp.11();
+        %tmp.13 = lt %tmp.9 %tmp.12;
+        bf %tmp.13 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_106_8_111_8_for_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_106_8_111_8_for_begin:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_106_45_111_8_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 107 12 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_106_45_111_8_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_106_45_111_8_stop" ]
+        %t.5 = local;
+        symbol [ t %t.5 107 16 17 ];
+        %tmp.14 = lgetv %buf;
+        symbol [ buf %tmp.14 107 20 23 ];
+        %tmp.15 = lgetv %i.4;
+        symbol [ i %tmp.15 107 24 25 ];
+        %tmp.16 = agetv %tmp.14 %tmp.15;
+        %tmp.17 = 0;
+        %tmp.18 = agetv %tmp.16 %tmp.17;
+        lputv %t.5 %tmp.18;
+        symbol [ t %t.5 107 16 17 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 108 12 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_108_12_110_12_if_stmt:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_108_16_108_36_begin:
+        %tmp.19 = lgetv %t.5;
+        symbol [ t %tmp.19 108 16 17 ];
+        %tmp.20 = lgetv %cutoff.1;
+        symbol [ cutoff %tmp.20 108 21 27 ];
+        %tmp.21 = gte %tmp.19 %tmp.20;
+        bf %tmp.21 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_108_12_110_12_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_108_31_108_36_true:
+        %tmp.22 = lgetv %t.5;
+        symbol [ t %tmp.22 108 31 32 ];
+        %tmp.23 = lgetv %nowSec;
+        symbol [ nowSec %tmp.23 108 36 42 ];
+        %tmp.24 = lte %tmp.22 %tmp.23;
+        push %tmp.24;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_108_31_108_36_end:
+        %tmp.25 = phi [%tmp.21 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_108_16_108_36_begin] [%tmp.24 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_108_31_108_36_true] [%tmp.25 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_108_31_108_36_end];
+        bf %tmp.25 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_108_12_110_12_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_108_12_110_12_if_true:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_108_44_110_12_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 109 16 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_109_16_109_79_if_stmt:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_109_20_109_41_begin:
+        %tmp.26 = lgetv %baseT.3;
+        symbol [ baseT %tmp.26 109 20 25 ];
+        %tmp.27 = null;
+        %tmp.28 = eq %tmp.26 %tmp.27;
+        bt %tmp.28 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_109_16_109_79_if_true;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_109_37_109_41_false:
+        %tmp.29 = lgetv %t.5;
+        symbol [ t %tmp.29 109 37 38 ];
+        %tmp.30 = lgetv %baseT.3;
+        symbol [ baseT %tmp.30 109 41 46 ];
+        %tmp.31 = as %tmp.30 { (!Null) };
+        %tmp.32 = gt %tmp.29 %tmp.31;
+        push %tmp.32;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_109_37_109_41_end:
+        %tmp.33 = phi [%tmp.28 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_109_20_109_41_begin] [%tmp.32 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_109_37_109_41_false] [%tmp.33 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_109_37_109_41_end];
+        bf %tmp.33 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_109_16_109_79_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_109_16_109_79_if_true:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_109_48_109_79_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 109 50 ]
+        %tmp.34 = lgetv %t.5;
+        symbol [ t %tmp.34 109 58 59 ];
+        lputv %baseT.3 %tmp.34;
+        symbol [ baseT %baseT.3 109 50 55 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 109 61 ]
+        %tmp.35 = lgetv %buf;
+        symbol [ buf %tmp.35 109 68 71 ];
+        %tmp.36 = lgetv %i.4;
+        symbol [ i %tmp.36 109 72 73 ];
+        %tmp.37 = agetv %tmp.35 %tmp.36;
+        %tmp.38 = 1;
+        %tmp.39 = agetv %tmp.37 %tmp.38;
+        lputv %base.2 %tmp.39;
+        symbol [ base %base.2 109 61 65 ];
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_109_48_109_79_stop:
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_109_16_109_79_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_109_16_109_79_if_end:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_108_44_110_12_stop:
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_108_12_110_12_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_108_12_110_12_if_end:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_106_45_111_8_stop:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_106_8_111_8_for_incr:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 106 ]
+        %tmp.42 = lgetv %i.4;
+        symbol [ i %tmp.42 106 40 41 ];
+        %tmp.43 = add %tmp.42 1;
+        lputv %i.4 %tmp.43;
+        symbol [ i %i.4 106 40 41 ];
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_106_8_111_8_for_test;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_106_8_111_8_for_end:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 112 8 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_112_8_112_38_if_stmt:
+        %tmp.44 = lgetv %base.2;
+        symbol [ base %tmp.44 112 12 16 ];
+        %tmp.45 = null;
+        %tmp.46 = eq %tmp.44 %tmp.45;
+        bf %tmp.46 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_112_8_112_38_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_112_8_112_38_if_true:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_112_26_112_38_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 112 28 ]
+        %tmp.47 = 0;
+        ret %tmp.47;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_112_26_112_38_stop:
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_112_8_112_38_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_112_8_112_38_if_end:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 113 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_102_105_115_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_102_105_115_4_stop" ]
+        %d.6 = local;
+        symbol [ d %d.6 113 12 13 ];
+        %tmp.48 = lgetv %cum;
+        symbol [ cum %tmp.48 113 16 19 ];
+        %tmp.49 = lgetv %base.2;
+        symbol [ base %tmp.49 113 22 26 ];
+        %tmp.50 = sub %tmp.48 %tmp.49;
+        lputv %d.6 %tmp.50;
+        symbol [ d %d.6 113 12 13 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 114 8 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_114_15_114_31_begin:
+        %tmp.51 = lgetv %d.6;
+        symbol [ d %tmp.51 114 16 17 ];
+        %tmp.52 = 0;
+        %tmp.53 = lt %tmp.51 %tmp.52;
+        bf %tmp.53 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_114_15_114_31_else_false;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_114_15_114_31_true:
+        %tmp.54 = lgetv %cum;
+        symbol [ cum %tmp.54 114 25 28 ];
+        push %tmp.54;
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_114_15_114_31_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_114_15_114_31_else_false:
+        %tmp.55 = lgetv %d.6;
+        symbol [ d %tmp.55 114 31 32 ];
+        push %tmp.55;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_114_15_114_31_end:
+        %tmp.56 = phi [%tmp.53 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_114_15_114_31_begin] [%tmp.54 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_114_15_114_31_true] [%tmp.55 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_114_15_114_31_else_false] [%tmp.56 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_114_15_114_31_end];
+        ret %tmp.56;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_102_105_115_4_stop:
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 119; @symbol_functiondef = [deltaOver,119,13,22]; @symbol_param<0> = [buf,119,23,26]; @symbol_param<0>_type<0> = [Array,119,30,35]; @symbol_param<1> = [cum,119,37,40]; @symbol_param<1>_type<0> = [Number,119,44,50]; @symbol_param<2> = [nowSec,119,52,58]; @symbol_param<2>_type<0> = [Number,119,62,68]; @symbol_param<3> = [minutes,119,70,77]; @symbol_param<3>_type<0> = [Number,119,81,87]; @symbol_return<0> = [Number,119,92,98]; ]
+    function deltaOver(buf as Array, cum as Number, nowSec as Number, minutes as Number) as Number {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_119_99_128_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 120 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_119_99_128_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_119_99_128_4_stop" ]
+        %target.1 = local;
+        symbol [ target %target.1 120 12 18 ];
+        %tmp.1 = lgetv %nowSec;
+        symbol [ nowSec %tmp.1 120 21 27 ];
+        %tmp.2 = lgetv %minutes;
+        symbol [ minutes %tmp.2 120 30 37 ];
+        %tmp.3 = 60;
+        %tmp.4 = mul %tmp.2 %tmp.3;
+        %tmp.5 = sub %tmp.1 %tmp.4;
+        lputv %target.1 %tmp.5;
+        symbol [ target %target.1 120 12 18 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 121 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_119_99_128_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_119_99_128_4_stop" ]
+        %base.2 = local;
+        symbol [ base %base.2 121 12 16 ];
+        %tmp.6 = null;
+        lputv %base.2 %tmp.6;
+        symbol [ base %base.2 121 12 16 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 122 8 ]
+        for @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_122_8_124_8_for_test @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_122_8_124_8_for_incr @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_122_8_124_8_for_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_122_8_124_8_for_init:
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_122_8_124_8_for_begin" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_122_8_124_8_for_end" ]
+        %i.3 = local;
+        symbol [ i %i.3 122 17 18 ];
+        %tmp.7 = 0;
+        lputv %i.3 %tmp.7;
+        symbol [ i %i.3 122 17 18 ];
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_122_8_124_8_for_test:
+        %tmp.8 = lgetv %i.3;
+        symbol [ i %tmp.8 122 24 25 ];
+        %tmp.9 = lgetv %buf;
+        symbol [ buf %tmp.9 122 28 31 ];
+        symbol [ size %tmp.10 122 32 36 ];
+        %tmp.10 = getv function %tmp.9 :size;
+        %tmp.11 = invoke %tmp.9 %tmp.10();
+        %tmp.12 = lt %tmp.8 %tmp.11;
+        bf %tmp.12 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_122_8_124_8_for_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_122_8_124_8_for_begin:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_122_45_124_8_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 123 12 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_123_12_123_87_if_stmt:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_123_16_123_52_begin:
+        %tmp.13 = lgetv %buf;
+        symbol [ buf %tmp.13 123 16 19 ];
+        %tmp.14 = lgetv %i.3;
+        symbol [ i %tmp.14 123 20 21 ];
+        %tmp.15 = agetv %tmp.13 %tmp.14;
+        %tmp.16 = 0;
+        %tmp.17 = agetv %tmp.15 %tmp.16;
+        %tmp.18 = lgetv %target.1;
+        symbol [ target %tmp.18 123 29 35 ];
+        %tmp.19 = gte %tmp.17 %tmp.18;
+        bf %tmp.19 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_123_12_123_87_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_123_39_123_52_true:
+        %tmp.20 = lgetv %buf;
+        symbol [ buf %tmp.20 123 39 42 ];
+        %tmp.21 = lgetv %i.3;
+        symbol [ i %tmp.21 123 43 44 ];
+        %tmp.22 = agetv %tmp.20 %tmp.21;
+        %tmp.23 = 0;
+        %tmp.24 = agetv %tmp.22 %tmp.23;
+        %tmp.25 = lgetv %nowSec;
+        symbol [ nowSec %tmp.25 123 52 58 ];
+        %tmp.26 = lte %tmp.24 %tmp.25;
+        push %tmp.26;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_123_39_123_52_end:
+        %tmp.27 = phi [%tmp.19 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_123_16_123_52_begin] [%tmp.26 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_123_39_123_52_true] [%tmp.27 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_123_39_123_52_end];
+        bf %tmp.27 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_123_12_123_87_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_123_12_123_87_if_true:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_123_60_123_87_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 123 62 ]
+        %tmp.28 = lgetv %buf;
+        symbol [ buf %tmp.28 123 69 72 ];
+        %tmp.29 = lgetv %i.3;
+        symbol [ i %tmp.29 123 73 74 ];
+        %tmp.30 = agetv %tmp.28 %tmp.29;
+        %tmp.31 = 1;
+        %tmp.32 = agetv %tmp.30 %tmp.31;
+        lputv %base.2 %tmp.32;
+        symbol [ base %base.2 123 62 66 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 123 80 ]
+        goto break @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_122_8_124_8_for_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_123_60_123_87_stop:
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_123_12_123_87_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_123_12_123_87_if_end:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_122_45_124_8_stop:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_122_8_124_8_for_incr:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 122 ]
+        %tmp.35 = lgetv %i.3;
+        symbol [ i %tmp.35 122 40 41 ];
+        %tmp.36 = add %tmp.35 1;
+        lputv %i.3 %tmp.36;
+        symbol [ i %i.3 122 40 41 ];
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_122_8_124_8_for_test;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_122_8_124_8_for_end:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 125 8 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_125_8_125_38_if_stmt:
+        %tmp.37 = lgetv %base.2;
+        symbol [ base %tmp.37 125 12 16 ];
+        %tmp.38 = null;
+        %tmp.39 = eq %tmp.37 %tmp.38;
+        bf %tmp.39 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_125_8_125_38_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_125_8_125_38_if_true:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_125_26_125_38_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 125 28 ]
+        %tmp.40 = 0;
+        ret %tmp.40;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_125_26_125_38_stop:
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_125_8_125_38_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_125_8_125_38_if_end:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 126 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_119_99_128_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_119_99_128_4_stop" ]
+        %d.4 = local;
+        symbol [ d %d.4 126 12 13 ];
+        %tmp.41 = lgetv %cum;
+        symbol [ cum %tmp.41 126 16 19 ];
+        %tmp.42 = lgetv %base.2;
+        symbol [ base %tmp.42 126 22 26 ];
+        %tmp.43 = sub %tmp.41 %tmp.42;
+        lputv %d.4 %tmp.43;
+        symbol [ d %d.4 126 12 13 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 127 8 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_127_15_127_31_begin:
+        %tmp.44 = lgetv %d.4;
+        symbol [ d %tmp.44 127 16 17 ];
+        %tmp.45 = 0;
+        %tmp.46 = lt %tmp.44 %tmp.45;
+        bf %tmp.46 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_127_15_127_31_else_false;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_127_15_127_31_true:
+        %tmp.47 = lgetv %cum;
+        symbol [ cum %tmp.47 127 25 28 ];
+        push %tmp.47;
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_127_15_127_31_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_127_15_127_31_else_false:
+        %tmp.48 = lgetv %d.4;
+        symbol [ d %tmp.48 127 31 32 ];
+        push %tmp.48;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_127_15_127_31_end:
+        %tmp.49 = phi [%tmp.46 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_127_15_127_31_begin] [%tmp.47 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_127_15_127_31_true] [%tmp.48 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_127_15_127_31_else_false] [%tmp.49 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_127_15_127_31_end];
+        ret %tmp.49;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_119_99_128_4_stop:
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 131; @symbol_functiondef = [readHrSamples,131,13,26]; @symbol_return<0> = [String,131,32,38]; ]
+    function readHrSamples() as String {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_131_39_146_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 132 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_131_39_146_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_131_39_146_4_stop" ]
+        %it.1 = local;
+        symbol [ it %it.1 132 12 14 ];
+        symbol [ ActivityMonitor %tmp.1 132 17 32 ];
+        %tmp.1 = getm $.Toybox.ActivityMonitor;
+        symbol [ getHeartRateHistory %tmp.2 132 33 52 ];
+        %tmp.2 = getv function %tmp.1 :getHeartRateHistory;
+        symbol [ Time %tmp.5 132 57 61 ];
+        %tmp.5 = getm $.Toybox.Time;
+        symbol [ Duration %tmp.6 132 62 70 ];
+        %tmp.6 = getv function ? %tmp.5 :Duration;
+        %tmp.7 = 300;
+        %tmp.3 = newc %tmp.6 (%tmp.7);
+        %tmp.8 = true;
+        %tmp.9 = invoke %tmp.1 %tmp.2(%tmp.3, %tmp.8);
+        lputv %it.1 %tmp.9;
+        symbol [ it %it.1 132 12 14 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 133 8 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_133_8_133_37_if_stmt:
+        %tmp.10 = lgetv %it.1;
+        symbol [ it %tmp.10 133 12 14 ];
+        %tmp.11 = null;
+        %tmp.12 = eq %tmp.10 %tmp.11;
+        bf %tmp.12 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_133_8_133_37_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_133_8_133_37_if_true:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_133_24_133_37_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 133 26 ]
+        %tmp.13 = "";
+        ret %tmp.13;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_133_24_133_37_stop:
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_133_8_133_37_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_133_8_133_37_if_end:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 134 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_131_39_146_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_131_39_146_4_stop" ]
+        %s.2 = local;
+        symbol [ s %s.2 134 12 13 ];
+        %tmp.14 = "";
+        lputv %s.2 %tmp.14;
+        symbol [ s %s.2 134 12 13 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 135 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_131_39_146_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_131_39_146_4_stop" ]
+        %sample.3 = local;
+        symbol [ sample %sample.3 135 12 18 ];
+        %tmp.15 = lgetv %it.1;
+        symbol [ it %tmp.15 135 21 23 ];
+        symbol [ next %tmp.16 135 24 28 ];
+        %tmp.16 = getv function %tmp.15 :next;
+        %tmp.17 = invoke %tmp.15 %tmp.16();
+        lputv %sample.3 %tmp.17;
+        symbol [ sample %sample.3 135 12 18 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 136 8 ]
+        while @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_136_8_144_8_while_test @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_136_8_144_8_while_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_136_8_144_8_while_test:
+        %tmp.18 = lgetv %sample.3;
+        symbol [ sample %tmp.18 136 15 21 ];
+        %tmp.19 = null;
+        %tmp.20 = ne %tmp.18 %tmp.19;
+        bf %tmp.20 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_136_8_144_8_while_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_136_8_144_8_while_begin:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_136_31_144_8_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 137 12 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_136_31_144_8_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_136_31_144_8_stop" ]
+        %hr.4 = local;
+        symbol [ hr %hr.4 137 16 18 ];
+        %tmp.21 = lgetv %sample.3;
+        symbol [ sample %tmp.21 137 21 27 ];
+        %tmp.22 = as %tmp.21 { (!Null) };
+        symbol [ heartRate %tmp.23 137 28 37 ];
+        %tmp.23 = getv %tmp.22 :heartRate;
+        lputv %hr.4 %tmp.23;
+        symbol [ hr %hr.4 137 16 18 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 138 12 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_12_142_12_if_stmt:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_16_138_88_begin:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_16_138_52_begin:
+        %tmp.24 = lgetv %hr.4;
+        symbol [ hr %tmp.24 138 16 18 ];
+        %tmp.25 = null;
+        %tmp.26 = ne %tmp.24 %tmp.25;
+        bf %tmp.26 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_12_142_12_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_30_138_52_true:
+        %tmp.27 = lgetv %hr.4;
+        symbol [ hr %tmp.27 138 30 32 ];
+        %tmp.28 = as %tmp.27 { (!Null) };
+        symbol [ ActivityMonitor %tmp.29 138 36 51 ];
+        %tmp.29 = getm $.Toybox.ActivityMonitor;
+        symbol [ INVALID_HR_SAMPLE %tmp.30 138 52 69 ];
+        %tmp.30 = getv %tmp.29 :INVALID_HR_SAMPLE;
+        %tmp.31 = ne %tmp.28 %tmp.30;
+        push %tmp.31;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_30_138_52_end:
+        %tmp.32 = phi [%tmp.26 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_16_138_52_begin] [%tmp.31 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_30_138_52_true] [%tmp.32 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_30_138_52_end];
+        bf %tmp.32 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_12_142_12_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_73_138_88_true:
+        %tmp.33 = lgetv %sample.3;
+        symbol [ sample %tmp.33 138 73 79 ];
+        %tmp.34 = as %tmp.33 { (!Null) };
+        symbol [ when %tmp.35 138 80 84 ];
+        %tmp.35 = getv %tmp.34 :when;
+        %tmp.36 = null;
+        %tmp.37 = ne %tmp.35 %tmp.36;
+        push %tmp.37;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_73_138_88_end:
+        %tmp.38 = phi [%tmp.32 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_16_138_88_begin] [%tmp.37 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_73_138_88_true] [%tmp.38 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_73_138_88_end];
+        bf %tmp.38 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_12_142_12_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_12_142_12_if_true:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_94_142_12_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 139 16 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_94_142_12_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_94_142_12_stop" ]
+        %tSec.5 = local;
+        symbol [ tSec %tSec.5 139 20 24 ];
+        %tmp.39 = lgetv %sample.3;
+        symbol [ sample %tmp.39 139 27 33 ];
+        %tmp.40 = as %tmp.39 { (!Null) };
+        symbol [ when %tmp.41 139 34 38 ];
+        %tmp.41 = getv %tmp.40 :when;
+        symbol [ value %tmp.42 139 39 44 ];
+        %tmp.42 = getv function %tmp.41 :value;
+        %tmp.43 = invoke %tmp.41 %tmp.42();
+        lputv %tSec.5 %tmp.43;
+        symbol [ tSec %tSec.5 139 20 24 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 140 16 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_140_16_140_48_if_stmt:
+        %tmp.44 = lgetv %s.2;
+        symbol [ s %tmp.44 140 20 21 ];
+        symbol [ length %tmp.45 140 22 28 ];
+        %tmp.45 = getv function %tmp.44 :length;
+        %tmp.46 = invoke %tmp.44 %tmp.45();
+        %tmp.47 = 0;
+        %tmp.48 = gt %tmp.46 %tmp.47;
+        bf %tmp.48 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_140_16_140_48_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_140_16_140_48_if_true:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_140_36_140_48_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 140 38 ]
+        %tmp.49 = lgetv %s.2;
+        symbol [ s %tmp.49 140 38 39 ];
+        %tmp.50 = ",";
+        %tmp.51 = add %tmp.49 %tmp.50;
+        lputv %s.2 %tmp.51;
+        symbol [ s %s.2 140 38 39 ];
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_140_36_140_48_stop:
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_140_16_140_48_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_140_16_140_48_if_end:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 141 16 ]
+        %tmp.52 = lgetv %s.2;
+        symbol [ s %tmp.52 141 16 17 ];
+        %tmp.53 = lgetv %tSec.5;
+        symbol [ tSec %tmp.53 141 21 25 ];
+        symbol [ toString %tmp.54 141 26 34 ];
+        %tmp.54 = getv function %tmp.53 :toString;
+        %tmp.55 = invoke %tmp.53 %tmp.54();
+        %tmp.56 = ":";
+        %tmp.57 = add %tmp.55 %tmp.56;
+        %tmp.58 = lgetv %hr.4;
+        symbol [ hr %tmp.58 141 45 47 ];
+        %tmp.59 = as %tmp.58 { (!Null) };
+        symbol [ toString %tmp.60 141 48 56 ];
+        %tmp.60 = getv function %tmp.59 :toString;
+        %tmp.61 = invoke %tmp.59 %tmp.60();
+        %tmp.62 = add %tmp.57 %tmp.61;
+        %tmp.63 = add %tmp.52 %tmp.62;
+        lputv %s.2 %tmp.63;
+        symbol [ s %s.2 141 16 17 ];
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_94_142_12_stop:
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_12_142_12_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_138_12_142_12_if_end:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 143 12 ]
+        %tmp.64 = lgetv %it.1;
+        symbol [ it %tmp.64 143 21 23 ];
+        symbol [ next %tmp.65 143 24 28 ];
+        %tmp.65 = getv function %tmp.64 :next;
+        %tmp.66 = invoke %tmp.64 %tmp.65();
+        lputv %sample.3 %tmp.66;
+        symbol [ sample %sample.3 143 12 18 ];
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_136_31_144_8_stop:
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_136_8_144_8_while_test;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_136_8_144_8_while_end:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 145 8 ]
+        %tmp.67 = lgetv %s.2;
+        symbol [ s %tmp.67 145 15 16 ];
+        ret %tmp.67;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_131_39_146_4_stop:
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 148; @symbol_functiondef = [fetchBg,148,13,20]; ]
+    function fetchBg() as Void {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_148_31_155_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 149 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_148_31_155_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_148_31_155_4_stop" ]
+        %options.1 = local;
+        symbol [ options %options.1 149 12 19 ];
+        %tmp.1 = newd 2;
+        %tmp.3 = const :method;
+        symbol [ method %tmp.3 150 13 19 const ];
+        symbol [ Communications %tmp.4 150 23 37 ];
+        %tmp.4 = getm $.Toybox.Communications;
+        symbol [ HTTP_REQUEST_METHOD_GET %tmp.5 150 38 61 ];
+        %tmp.5 = getv %tmp.4 :HTTP_REQUEST_METHOD_GET;
+        %tmp.6 = dup %tmp.1;
+        %tmp.7 = aputv %tmp.6 %tmp.3 %tmp.5;
+        %tmp.9 = const :responseType;
+        symbol [ responseType %tmp.9 151 13 25 const ];
+        symbol [ Communications %tmp.10 151 29 43 ];
+        %tmp.10 = getm $.Toybox.Communications;
+        symbol [ HTTP_RESPONSE_CONTENT_TYPE_JSON %tmp.11 151 44 75 ];
+        %tmp.11 = getv %tmp.10 :HTTP_RESPONSE_CONTENT_TYPE_JSON;
+        %tmp.12 = dup %tmp.7;
+        %tmp.13 = aputv %tmp.12 %tmp.9 %tmp.11;
+        lputv %options.1 %tmp.13;
+        symbol [ options %options.1 149 12 19 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 153 8 ]
+        symbol [ Communications %tmp.14 153 8 22 ];
+        %tmp.14 = getm $.Toybox.Communications;
+        symbol [ makeWebRequest %tmp.15 153 23 37 ];
+        %tmp.15 = getv function %tmp.14 :makeWebRequest;
+        %tmp.16 = self;
+        symbol [ base %tmp.17 153 38 42 ];
+        %tmp.17 = getv function %tmp.16 :base;
+        %tmp.18 = invoke %tmp.16 %tmp.17();
+        %tmp.19 = "/sgv.json";
+        %tmp.20 = add %tmp.18 %tmp.19;
+        %tmp.21 = newd 2;
+        %tmp.22 = "count";
+        %tmp.23 = 12;
+        %tmp.24 = dup %tmp.21;
+        %tmp.25 = aputv %tmp.24 %tmp.22 %tmp.23;
+        %tmp.26 = "brief_mode";
+        %tmp.27 = "true";
+        %tmp.28 = dup %tmp.25;
+        %tmp.29 = aputv %tmp.28 %tmp.26 %tmp.27;
+        %tmp.30 = lgetv %options.1;
+        symbol [ options %tmp.30 154 55 62 ];
+        %tmp.31 = self;
+        symbol [ method %tmp.32 154 64 70 ];
+        %tmp.32 = getv function %tmp.31 :method;
+        %tmp.34 = const :onReceive;
+        symbol [ onReceive %tmp.34 154 72 81 const ];
+        %tmp.35 = invoke %tmp.31 %tmp.32(%tmp.34);
+        invoke %tmp.14 %tmp.15(%tmp.20, %tmp.29, %tmp.30, %tmp.35);
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_148_31_155_4_stop:
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 160; @symbol_functiondef = [onReceive,160,13,22]; @symbol_param<0> = [code,161,8,12]; @symbol_param<0>_type<0> = [Number,161,16,22]; @symbol_param<1> = [data,162,8,12]; @symbol_param<1>_type<0> = [Dictionary,162,24,34]; @symbol_param<1>_type<1> = [String,162,38,44]; @symbol_param<1>_type<2> = [PersistedContent,162,48,64]; @symbol_param<1>_type<3> = [Iterator,162,65,73]; ]
+    function onReceive(code as Number, data as Null or Dictionary or String or PersistedContent.Iterator) as Void {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_163_14_200_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 166 8 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_163_14_200_4_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_163_14_200_4_stop" ]
+        %obj.1 = local;
+        symbol [ obj %obj.1 166 12 15 ];
+        %tmp.1 = lgetv %data;
+        symbol [ data %tmp.1 166 18 22 ];
+        %tmp.2 = as %tmp.1 Object or Null;
+        symbol [ Object %tmp.2 166 26 32 ];
+        lputv %obj.1 %tmp.2;
+        symbol [ obj %obj.1 166 12 15 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 167 8 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_8_199_8_if_stmt:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_12_167_90_begin:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_12_167_57_begin:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_12_167_34_begin:
+        %tmp.3 = lgetv %code;
+        symbol [ code %tmp.3 167 12 16 ];
+        %tmp.4 = 200;
+        %tmp.5 = eq %tmp.3 %tmp.4;
+        bf %tmp.5 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_8_199_8_if_else_false;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_27_167_34_true:
+        %tmp.6 = lgetv %obj.1;
+        symbol [ obj %tmp.6 167 27 30 ];
+        %tmp.7 = null;
+        %tmp.8 = ne %tmp.6 %tmp.7;
+        push %tmp.8;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_27_167_34_end:
+        %tmp.9 = phi [%tmp.5 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_12_167_34_begin] [%tmp.8 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_27_167_34_true] [%tmp.9 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_27_167_34_end];
+        bf %tmp.9 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_8_199_8_if_else_false;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_42_167_57_true:
+        %tmp.10 = lgetv %obj.1;
+        symbol [ obj %tmp.10 167 42 45 ];
+        %tmp.11 = as %tmp.10 { (!Null) };
+        symbol [ Array %tmp.13 167 57 62 ];
+        %tmp.13 = getv ? :Array;
+        %tmp.14 = isa %tmp.11 %tmp.13;
+        push %tmp.14;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_42_167_57_end:
+        %tmp.15 = phi [%tmp.9 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_12_167_57_begin] [%tmp.14 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_42_167_57_true] [%tmp.15 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_42_167_57_end];
+        bf %tmp.15 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_8_199_8_if_else_false;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_66_167_90_true:
+        %tmp.16 = lgetv %obj.1;
+        symbol [ obj %tmp.16 167 67 70 ];
+        %tmp.17 = as %tmp.16 { (Array) && (!Null) };
+        %tmp.18 = as %tmp.17 Array;
+        symbol [ Array %tmp.18 167 74 79 ];
+        symbol [ size %tmp.19 167 81 85 ];
+        %tmp.19 = getv function %tmp.18 :size;
+        %tmp.20 = invoke %tmp.18 %tmp.19();
+        %tmp.21 = 0;
+        %tmp.22 = gt %tmp.20 %tmp.21;
+        push %tmp.22;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_66_167_90_end:
+        %tmp.23 = phi [%tmp.15 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_12_167_90_begin] [%tmp.22 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_66_167_90_true] [%tmp.23 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_66_167_90_end];
+        bf %tmp.23 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_8_199_8_if_else_false;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_8_199_8_if_true:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_93_196_8_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 168 12 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_93_196_8_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_93_196_8_stop" ]
+        %arr.2 = local;
+        symbol [ arr %arr.2 168 16 19 ];
+        %tmp.24 = lgetv %obj.1;
+        symbol [ obj %tmp.24 168 22 25 ];
+        %tmp.25 = as %tmp.24 { (Array) && (!Null) };
+        %tmp.26 = as %tmp.25 Array;
+        symbol [ Array %tmp.26 168 29 34 ];
+        lputv %arr.2 %tmp.26;
+        symbol [ arr %arr.2 168 16 19 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 169 12 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_93_196_8_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_93_196_8_stop" ]
+        %latest.3 = local;
+        symbol [ latest %latest.3 169 16 22 ];
+        %tmp.27 = lgetv %arr.2;
+        symbol [ arr %tmp.27 169 25 28 ];
+        %tmp.28 = 0;
+        %tmp.29 = agetv %tmp.27 %tmp.28;
+        %tmp.30 = as %tmp.29 Dictionary;
+        symbol [ Dictionary %tmp.30 169 35 45 ];
+        lputv %latest.3 %tmp.30;
+        symbol [ latest %latest.3 169 16 22 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 172 12 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_93_196_8_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_93_196_8_stop" ]
+        %hist.4 = local;
+        symbol [ hist %hist.4 172 16 20 ];
+        %tmp.31 = newa 0;
+        lputv %hist.4 %tmp.31;
+        symbol [ hist %hist.4 172 16 20 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 173 12 ]
+        for @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_173_12_176_12_for_test @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_173_12_176_12_for_incr @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_173_12_176_12_for_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_173_12_176_12_for_init:
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_173_12_176_12_for_begin" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_173_12_176_12_for_end" ]
+        %i.5 = local;
+        symbol [ i %i.5 173 21 22 ];
+        %tmp.32 = 0;
+        lputv %i.5 %tmp.32;
+        symbol [ i %i.5 173 21 22 ];
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_173_12_176_12_for_test:
+        %tmp.33 = lgetv %i.5;
+        symbol [ i %tmp.33 173 28 29 ];
+        %tmp.34 = lgetv %arr.2;
+        symbol [ arr %tmp.34 173 32 35 ];
+        symbol [ size %tmp.35 173 36 40 ];
+        %tmp.35 = getv function %tmp.34 :size;
+        %tmp.36 = invoke %tmp.34 %tmp.35();
+        %tmp.37 = lt %tmp.33 %tmp.36;
+        bf %tmp.37 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_173_12_176_12_for_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_173_12_176_12_for_begin:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_173_49_176_12_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 174 16 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_173_49_176_12_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_173_49_176_12_stop" ]
+        %v.6 = local;
+        symbol [ v %v.6 174 20 21 ];
+        %tmp.38 = self;
+        symbol [ numOrNull %tmp.39 174 24 33 ];
+        %tmp.39 = getv function %tmp.38 :numOrNull;
+        %tmp.40 = lgetv %arr.2;
+        symbol [ arr %tmp.40 174 34 37 ];
+        %tmp.41 = lgetv %i.5;
+        symbol [ i %tmp.41 174 38 39 ];
+        %tmp.42 = agetv %tmp.40 %tmp.41;
+        %tmp.43 = as %tmp.42 Dictionary;
+        symbol [ Dictionary %tmp.43 174 44 54 ];
+        %tmp.44 = "sgv";
+        %tmp.45 = invoke %tmp.38 %tmp.39(%tmp.43, %tmp.44);
+        lputv %v.6 %tmp.45;
+        symbol [ v %v.6 174 20 21 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 175 16 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_175_16_175_46_if_stmt:
+        %tmp.46 = lgetv %v.6;
+        symbol [ v %tmp.46 175 20 21 ];
+        %tmp.47 = null;
+        %tmp.48 = ne %tmp.46 %tmp.47;
+        bf %tmp.48 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_175_16_175_46_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_175_16_175_46_if_true:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_175_31_175_46_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 175 33 ]
+        %tmp.49 = lgetv %hist.4;
+        symbol [ hist %tmp.49 175 33 37 ];
+        symbol [ add %tmp.50 175 38 41 ];
+        %tmp.50 = getv function %tmp.49 :add;
+        %tmp.51 = lgetv %v.6;
+        symbol [ v %tmp.51 175 42 43 ];
+        %tmp.52 = as %tmp.51 { (!Null) };
+        invoke %tmp.49 %tmp.50(%tmp.52);
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_175_31_175_46_stop:
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_175_16_175_46_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_175_16_175_46_if_end:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_173_49_176_12_stop:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_173_12_176_12_for_incr:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 173 ]
+        %tmp.55 = lgetv %i.5;
+        symbol [ i %tmp.55 173 44 45 ];
+        %tmp.56 = add %tmp.55 1;
+        lputv %i.5 %tmp.56;
+        symbol [ i %i.5 173 44 45 ];
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_173_12_176_12_for_test;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_173_12_176_12_for_end:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 179 12 ]
+        [ "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_93_196_8_start" "_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_93_196_8_stop" ]
+        %out.7 = local;
+        symbol [ out %out.7 179 16 19 ];
+        %tmp.57 = newd 14;
+        %tmp.58 = "bg";
+        %tmp.59 = self;
+        symbol [ numOrNull %tmp.60 180 28 37 ];
+        %tmp.60 = getv function %tmp.59 :numOrNull;
+        %tmp.61 = lgetv %latest.3;
+        symbol [ latest %tmp.61 180 38 44 ];
+        %tmp.62 = "sgv";
+        %tmp.63 = invoke %tmp.59 %tmp.60(%tmp.61, %tmp.62);
+        %tmp.64 = dup %tmp.57;
+        %tmp.65 = aputv %tmp.64 %tmp.58 %tmp.63;
+        %tmp.66 = "dir";
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_181_29_181_80_begin:
+        %tmp.67 = lgetv %latest.3;
+        symbol [ latest %tmp.67 181 29 35 ];
+        symbol [ hasKey %tmp.68 181 36 42 ];
+        %tmp.68 = getv function %tmp.67 :hasKey;
+        %tmp.69 = "direction";
+        %tmp.70 = invoke %tmp.67 %tmp.68(%tmp.69);
+        bf %tmp.70 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_181_29_181_80_else_false;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_181_29_181_80_true:
+        %tmp.71 = lgetv %latest.3;
+        symbol [ latest %tmp.71 181 58 64 ];
+        %tmp.72 = "direction";
+        %tmp.73 = agetv %tmp.71 %tmp.72;
+        push %tmp.73;
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_181_29_181_80_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_181_29_181_80_else_false:
+        %tmp.74 = null;
+        push %tmp.74;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_181_29_181_80_end:
+        %tmp.75 = phi [%tmp.70 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_181_29_181_80_begin] [%tmp.73 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_181_29_181_80_true] [%tmp.74 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_181_29_181_80_else_false] [%tmp.75 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_181_29_181_80_end];
+        %tmp.76 = dup %tmp.65;
+        %tmp.77 = aputv %tmp.76 %tmp.66 %tmp.75;
+        %tmp.78 = "delta";
+        %tmp.79 = self;
+        symbol [ numOrNull %tmp.80 182 28 37 ];
+        %tmp.80 = getv function %tmp.79 :numOrNull;
+        %tmp.81 = lgetv %latest.3;
+        symbol [ latest %tmp.81 182 38 44 ];
+        %tmp.82 = "delta";
+        %tmp.83 = invoke %tmp.79 %tmp.80(%tmp.81, %tmp.82);
+        %tmp.84 = dup %tmp.77;
+        %tmp.85 = aputv %tmp.84 %tmp.78 %tmp.83;
+        %tmp.86 = "sgvMs";
+        %tmp.87 = self;
+        symbol [ numOrNull %tmp.88 183 28 37 ];
+        %tmp.88 = getv function %tmp.87 :numOrNull;
+        %tmp.89 = lgetv %latest.3;
+        symbol [ latest %tmp.89 183 38 44 ];
+        %tmp.90 = "date";
+        %tmp.91 = invoke %tmp.87 %tmp.88(%tmp.89, %tmp.90);
+        %tmp.92 = dup %tmp.85;
+        %tmp.93 = aputv %tmp.92 %tmp.86 %tmp.91;
+        %tmp.94 = "iob";
+        %tmp.95 = self;
+        symbol [ numOrNull %tmp.96 184 28 37 ];
+        %tmp.96 = getv function %tmp.95 :numOrNull;
+        %tmp.97 = lgetv %latest.3;
+        symbol [ latest %tmp.97 184 38 44 ];
+        %tmp.98 = "iob";
+        %tmp.99 = invoke %tmp.95 %tmp.96(%tmp.97, %tmp.98);
+        %tmp.100 = dup %tmp.93;
+        %tmp.101 = aputv %tmp.100 %tmp.94 %tmp.99;
+        %tmp.102 = "cob";
+        %tmp.103 = self;
+        symbol [ numOrNull %tmp.104 185 28 37 ];
+        %tmp.104 = getv function %tmp.103 :numOrNull;
+        %tmp.105 = lgetv %latest.3;
+        symbol [ latest %tmp.105 185 38 44 ];
+        %tmp.106 = "cob";
+        %tmp.107 = invoke %tmp.103 %tmp.104(%tmp.105, %tmp.106);
+        %tmp.108 = dup %tmp.101;
+        %tmp.109 = aputv %tmp.108 %tmp.102 %tmp.107;
+        %tmp.110 = "tbr";
+        %tmp.111 = self;
+        symbol [ numOrNull %tmp.112 186 28 37 ];
+        %tmp.112 = getv function %tmp.111 :numOrNull;
+        %tmp.113 = lgetv %latest.3;
+        symbol [ latest %tmp.113 186 38 44 ];
+        %tmp.114 = "tbr";
+        %tmp.115 = invoke %tmp.111 %tmp.112(%tmp.113, %tmp.114);
+        %tmp.116 = dup %tmp.109;
+        %tmp.117 = aputv %tmp.116 %tmp.110 %tmp.115;
+        %tmp.118 = "loop";
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_187_29_187_70_begin:
+        %tmp.119 = lgetv %latest.3;
+        symbol [ latest %tmp.119 187 29 35 ];
+        symbol [ hasKey %tmp.120 187 36 42 ];
+        %tmp.120 = getv function %tmp.119 :hasKey;
+        %tmp.121 = "loop";
+        %tmp.122 = invoke %tmp.119 %tmp.120(%tmp.121);
+        bf %tmp.122 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_187_29_187_70_else_false;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_187_29_187_70_true:
+        %tmp.123 = lgetv %latest.3;
+        symbol [ latest %tmp.123 187 53 59 ];
+        %tmp.124 = "loop";
+        %tmp.125 = agetv %tmp.123 %tmp.124;
+        push %tmp.125;
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_187_29_187_70_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_187_29_187_70_else_false:
+        %tmp.126 = null;
+        push %tmp.126;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_187_29_187_70_end:
+        %tmp.127 = phi [%tmp.122 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_187_29_187_70_begin] [%tmp.125 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_187_29_187_70_true] [%tmp.126 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_187_29_187_70_else_false] [%tmp.127 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_187_29_187_70_end];
+        %tmp.128 = dup %tmp.117;
+        %tmp.129 = aputv %tmp.128 %tmp.118 %tmp.127;
+        %tmp.130 = "loopMs";
+        %tmp.131 = self;
+        symbol [ numOrNull %tmp.132 188 28 37 ];
+        %tmp.132 = getv function %tmp.131 :numOrNull;
+        %tmp.133 = lgetv %latest.3;
+        symbol [ latest %tmp.133 188 38 44 ];
+        %tmp.134 = "loopMs";
+        %tmp.135 = invoke %tmp.131 %tmp.132(%tmp.133, %tmp.134);
+        %tmp.136 = dup %tmp.129;
+        %tmp.137 = aputv %tmp.136 %tmp.130 %tmp.135;
+        %tmp.138 = "isf";
+        %tmp.139 = self;
+        symbol [ numOrNull %tmp.140 189 28 37 ];
+        %tmp.140 = getv function %tmp.139 :numOrNull;
+        %tmp.141 = lgetv %latest.3;
+        symbol [ latest %tmp.141 189 38 44 ];
+        %tmp.142 = "isf";
+        %tmp.143 = invoke %tmp.139 %tmp.140(%tmp.141, %tmp.142);
+        %tmp.144 = dup %tmp.137;
+        %tmp.145 = aputv %tmp.144 %tmp.138 %tmp.143;
+        %tmp.146 = "units";
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_190_29_190_82_begin:
+        %tmp.147 = lgetv %latest.3;
+        symbol [ latest %tmp.147 190 29 35 ];
+        symbol [ hasKey %tmp.148 190 36 42 ];
+        %tmp.148 = getv function %tmp.147 :hasKey;
+        %tmp.149 = "units_hint";
+        %tmp.150 = invoke %tmp.147 %tmp.148(%tmp.149);
+        bf %tmp.150 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_190_29_190_82_else_false;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_190_29_190_82_true:
+        %tmp.151 = lgetv %latest.3;
+        symbol [ latest %tmp.151 190 59 65 ];
+        %tmp.152 = "units_hint";
+        %tmp.153 = agetv %tmp.151 %tmp.152;
+        push %tmp.153;
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_190_29_190_82_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_190_29_190_82_else_false:
+        %tmp.154 = null;
+        push %tmp.154;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_190_29_190_82_end:
+        %tmp.155 = phi [%tmp.150 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_190_29_190_82_begin] [%tmp.153 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_190_29_190_82_true] [%tmp.154 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_190_29_190_82_else_false] [%tmp.155 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_190_29_190_82_end];
+        %tmp.156 = dup %tmp.145;
+        %tmp.157 = aputv %tmp.156 %tmp.146 %tmp.155;
+        %tmp.158 = "hist";
+        %tmp.159 = lgetv %hist.4;
+        symbol [ hist %tmp.159 191 28 32 ];
+        %tmp.160 = dup %tmp.157;
+        %tmp.161 = aputv %tmp.160 %tmp.158 %tmp.159;
+        %tmp.162 = "ok";
+        %tmp.163 = true;
+        %tmp.164 = dup %tmp.161;
+        %tmp.165 = aputv %tmp.164 %tmp.162 %tmp.163;
+        %tmp.166 = "code";
+        %tmp.167 = lgetv %code;
+        symbol [ code %tmp.167 193 28 32 ];
+        %tmp.168 = dup %tmp.165;
+        %tmp.169 = aputv %tmp.168 %tmp.166 %tmp.167;
+        lputv %out.7 %tmp.169;
+        symbol [ out %out.7 179 16 19 ];
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 195 12 ]
+        symbol [ Background %tmp.170 195 12 22 ];
+        %tmp.170 = getm $.Toybox.Background;
+        symbol [ exit %tmp.171 195 23 27 ];
+        %tmp.171 = getv function %tmp.170 :exit;
+        %tmp.172 = lgetv %out.7;
+        symbol [ out %tmp.172 195 28 31 ];
+        invoke %tmp.170 %tmp.171(%tmp.172);
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_93_196_8_stop:
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_8_199_8_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_8_199_8_if_else_false:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_196_15_199_8_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 198 12 ]
+        symbol [ Background %tmp.173 198 12 22 ];
+        %tmp.173 = getm $.Toybox.Background;
+        symbol [ exit %tmp.174 198 23 27 ];
+        %tmp.174 = getv function %tmp.173 :exit;
+        %tmp.175 = newd 2;
+        %tmp.176 = "ok";
+        %tmp.177 = false;
+        %tmp.178 = dup %tmp.175;
+        %tmp.179 = aputv %tmp.178 %tmp.176 %tmp.177;
+        %tmp.180 = "code";
+        %tmp.181 = lgetv %code;
+        symbol [ code %tmp.181 198 55 59 ];
+        %tmp.182 = dup %tmp.179;
+        %tmp.183 = aputv %tmp.182 %tmp.180 %tmp.181;
+        invoke %tmp.173 %tmp.174(%tmp.183);
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_196_15_199_8_stop:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_167_8_199_8_if_end:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_163_14_200_4_stop:
+    }
+    [ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 202; @symbol_functiondef = [numOrNull,202,13,22]; @symbol_param<0> = [d,202,23,24]; @symbol_param<0>_type<0> = [Dictionary,202,28,38]; @symbol_param<1> = [key,202,40,43]; @symbol_param<1>_type<0> = [String,202,47,53]; ]
+    function numOrNull(d as Dictionary, key as String) {
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_202_55_205_4_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 203 8 ]
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_8_203_75_if_stmt:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_12_203_52_begin:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_12_203_37_begin:
+        %tmp.1 = lgetv %d;
+        symbol [ d %tmp.1 203 12 13 ];
+        %tmp.2 = null;
+        %tmp.3 = ne %tmp.1 %tmp.2;
+        bf %tmp.3 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_8_203_75_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_25_203_37_true:
+        %tmp.4 = lgetv %d;
+        symbol [ d %tmp.4 203 25 26 ];
+        %tmp.5 = as %tmp.4 { (!Null) };
+        symbol [ hasKey %tmp.6 203 27 33 ];
+        %tmp.6 = getv function %tmp.5 :hasKey;
+        %tmp.7 = lgetv %key;
+        symbol [ key %tmp.7 203 34 37 ];
+        %tmp.8 = invoke %tmp.5 %tmp.6(%tmp.7);
+        push %tmp.8;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_25_203_37_end:
+        %tmp.9 = phi [%tmp.3 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_12_203_37_begin] [%tmp.8 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_25_203_37_true] [%tmp.9 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_25_203_37_end];
+        bf %tmp.9 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_8_203_75_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_42_203_52_true:
+        %tmp.10 = lgetv %d;
+        symbol [ d %tmp.10 203 42 43 ];
+        %tmp.11 = as %tmp.10 { (!Null) };
+        %tmp.12 = lgetv %key;
+        symbol [ key %tmp.12 203 44 47 ];
+        %tmp.13 = agetv %tmp.11 %tmp.12;
+        %tmp.14 = null;
+        %tmp.15 = ne %tmp.13 %tmp.14;
+        push %tmp.15;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_42_203_52_end:
+        %tmp.16 = phi [%tmp.9 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_12_203_52_begin] [%tmp.15 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_42_203_52_true] [%tmp.16 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_42_203_52_end];
+        bf %tmp.16 @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_8_203_75_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_8_203_75_if_true:
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_58_203_75_start:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 203 60 ]
+        %tmp.17 = lgetv %d;
+        symbol [ d %tmp.17 203 67 68 ];
+        %tmp.18 = as %tmp.17 { (!Null) };
+        %tmp.19 = lgetv %key;
+        symbol [ key %tmp.19 203 69 72 ];
+        %tmp.20 = agetv %tmp.18 %tmp.19;
+        ret %tmp.20;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_58_203_75_stop:
+        goto @_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_8_203_75_if_end;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_203_8_203_75_if_end:
+[ "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc" 204 8 ]
+        %tmp.21 = null;
+        ret %tmp.21;
+_Users_timstreet_StudioProjects_BoostGarminGraph_source_BgService_mc_202_55_205_4_stop:
+    }
+}
+[ @file = "/Users/timstreet/StudioProjects/BoostGarminGraph/source/BgService.mc"; @line = 1; ]
+<init> {
+}
