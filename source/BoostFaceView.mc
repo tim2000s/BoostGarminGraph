@@ -79,43 +79,48 @@ class BoostFaceView extends WatchUi.WatchFace {
         dc.drawText((205 * R).toNumber(), vaY, vf(30, false, R, Graphics.FONT_MEDIUM),
                     (tbrV == null ? "--" : tbrV.format("%d") + "%"), VC);
 
-        // BG: blue delta + blue trend arrow above, big band-coloured value. Inset to clear the ring.
-        drawTrendArrows(dc, (372 * R).toNumber(), (100 * R).toNumber(), (11 * R).toNumber(), BoostData.dir(), BLUE);
+        // BG: blue delta + blue trend arrow above, big band-coloured value. Pulled well inside the ring.
+        drawTrendArrows(dc, (346 * R).toNumber(), (108 * R).toNumber(), (11 * R).toNumber(), BoostData.dir(), BLUE);
         dc.setColor(BLUE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText((338 * R).toNumber(), (100 * R).toNumber(), vf(24, false, R, Graphics.FONT_SMALL),
+        dc.drawText((310 * R).toNumber(), (108 * R).toNumber(), vf(24, false, R, Graphics.FONT_SMALL),
                     BoostData.deltaText(), VC);
         dc.setColor(bgCol, Graphics.COLOR_TRANSPARENT);
-        dc.drawText((330 * R).toNumber(), (150 * R).toNumber(), vf(60, true, R, Graphics.FONT_NUMBER_MEDIUM), BoostData.bgText(), VC);
+        dc.drawText((322 * R).toNumber(), (150 * R).toNumber(), vf(60, true, R, Graphics.FONT_NUMBER_MEDIUM), BoostData.bgText(), VC);
 
         // ── divider 1 ──
-        hline(dc, R, 188);
+        hline(dc, R, 176);
 
-        // ── HERO time (big, left) | date + steps (right) ──
+        // ── HERO time (big, left) | date · steps · HR (right) — taller centre band ──
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText((150 * R).toNumber(), (240 * R).toNumber(), vf(90, true, R, Graphics.FONT_NUMBER_HOT), timeStr, VC);
+        dc.drawText((148 * R).toNumber(), (246 * R).toNumber(), vf(94, true, R, Graphics.FONT_NUMBER_HOT), timeStr, VC);
         dc.setColor(0x444444, Graphics.COLOR_TRANSPARENT);
         var pw2 = (2 * R).toNumber(); if (pw2 < 1) { pw2 = 1; }
         dc.setPenWidth(pw2);
-        dc.drawLine((292 * R).toNumber(), (212 * R).toNumber(), (292 * R).toNumber(), (268 * R).toNumber());
+        dc.drawLine((292 * R).toNumber(), (198 * R).toNumber(), (292 * R).toNumber(), (300 * R).toNumber());
         dc.setPenWidth(1);
+        // right column: date (blue) · steps · HR
         dc.setColor(BLUE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText((316 * R).toNumber(), (222 * R).toNumber(), vf(26, false, R, Graphics.FONT_SMALL), dateShort(), LVC);
-        drawFootprints(dc, (326 * R).toNumber(), (262 * R).toNumber(), (18 * R).toNumber(), teal);
+        dc.drawText((312 * R).toNumber(), (212 * R).toNumber(), vf(26, false, R, Graphics.FONT_SMALL), dateShort(), LVC);
+        drawFootprints(dc, (320 * R).toNumber(), (251 * R).toNumber(), (17 * R).toNumber(), teal);
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText((344 * R).toNumber(), (262 * R).toNumber(), vf(24, false, R, Graphics.FONT_SMALL), stepStr(), LVC);
+        dc.drawText((338 * R).toNumber(), (251 * R).toNumber(), vf(24, false, R, Graphics.FONT_SMALL), stepStr(), LVC);
+        drawHeart(dc, (320 * R).toNumber(), (289 * R).toNumber(), (14 * R).toNumber(), 0xFF5252);
+        var hr = currentHr();
+        dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
+        dc.drawText((338 * R).toNumber(), (289 * R).toNumber(), vf(24, false, R, Graphics.FONT_SMALL), (hr == null ? "--" : hr.toString()), LVC);
 
         // ── divider 2 ──
-        hline(dc, R, 296);
+        hline(dc, R, 312);
 
         // ── BG trend graph (12 points), inset to clear the ring ──
-        drawGraph(dc, (108 * R).toNumber(), (315 * R).toNumber(), (234 * R).toNumber(), (64 * R).toNumber(), band, stale, R);
+        drawGraph(dc, (112 * R).toNumber(), (322 * R).toNumber(), (226 * R).toNumber(), (52 * R).toNumber(), band, stale, R);
 
         // ── divider 3 (auto-inset by hline) ──
-        hline(dc, R, 396);
+        hline(dc, R, 388);
 
         // ── battery (centred, in the ring's bottom gap) ──
         var pct = System.getSystemStats().battery;
-        drawBatteryCentred(dc, cx, (424 * R).toNumber(), (34 * R).toNumber(), pct);
+        drawBatteryCentred(dc, cx, (414 * R).toNumber(), (34 * R).toNumber(), pct);
     }
 
     // Boost BG ring: dim track + band fill of `frac` over a 300° sweep from the top (60° gap at bottom).
@@ -245,19 +250,40 @@ class BoostFaceView extends WatchUi.WatchFace {
         dc.setPenWidth(1);
     }
 
-    // Syringe (IOB): plunger rod + flange · barrel (rounded rect) · needle — horizontal, clear at small size.
+    // Rotated point: (x,y) + (al*axis + pe*perp)*s, returned as [Number,Number].
+    function _sp(x, y, ux, uy, px, py, s, al, pe) {
+        return [ (x + (al * ux + pe * px) * s).toNumber(), (y + (al * uy + pe * py) * s).toNumber() ];
+    }
+
+    // Syringe (IOB): a FILLED diagonal syringe pointing up-right — needle (lower-left) · barrel with
+    // finger-grips · plunger rod + T-flange (upper-right). Matches the reference glyph.
     function drawSyringe(dc, x, y, s, color) as Void {
         dc.setColor(color, Graphics.COLOR_TRANSPARENT);
-        var pw = (s / 7.0).toNumber(); if (pw < 2) { pw = 2; }
+        var a = -Math.PI / 4.0;                       // up-right axis (needle→plunger)
+        var ux = Math.cos(a); var uy = Math.sin(a);
+        var px = -uy;         var py = ux;            // perpendicular
+        var c1 = _sp(x, y, ux, uy, px, py, s, -0.55, -0.30);
+        var c2 = _sp(x, y, ux, uy, px, py, s,  0.55, -0.30);
+        var c3 = _sp(x, y, ux, uy, px, py, s,  0.55,  0.30);
+        var c4 = _sp(x, y, ux, uy, px, py, s, -0.55,  0.30);
+        dc.fillPolygon([c1, c2, c3, c4]);             // barrel
+        var pw = (s * 0.16).toNumber(); if (pw < 2) { pw = 2; }
         dc.setPenWidth(pw);
-        var bw = (s * 1.05).toNumber();
-        var bh = (s * 0.7).toNumber();
-        var bx = (x - s * 0.35).toNumber();
-        var by = (y - bh / 2).toNumber();
-        dc.drawRoundedRectangle(bx, by, bw, bh, (2 * s / 14.0).toNumber());   // barrel
-        dc.drawLine((x - s).toNumber(), y.toNumber(), bx, y.toNumber());       // plunger rod
-        dc.drawLine((x - s).toNumber(), (y - s * 0.45).toNumber(), (x - s).toNumber(), (y + s * 0.45).toNumber()); // flange
-        dc.drawLine((bx + bw), y.toNumber(), (x + s).toNumber(), y.toNumber());// needle
+        var nb = _sp(x, y, ux, uy, px, py, s, -0.55, 0.0);
+        var nt = _sp(x, y, ux, uy, px, py, s, -1.40, 0.0);
+        dc.drawLine(nb[0], nb[1], nt[0], nt[1]);      // needle
+        var r1 = _sp(x, y, ux, uy, px, py, s, 0.55, 0.0);
+        var r2 = _sp(x, y, ux, uy, px, py, s, 1.05, 0.0);
+        dc.drawLine(r1[0], r1[1], r2[0], r2[1]);      // plunger rod
+        var f1 = _sp(x, y, ux, uy, px, py, s, 1.05, -0.42);
+        var f2 = _sp(x, y, ux, uy, px, py, s, 1.05,  0.42);
+        dc.drawLine(f1[0], f1[1], f2[0], f2[1]);      // T-flange
+        var g1a = _sp(x, y, ux, uy, px, py, s, 0.5,  0.30);
+        var g1b = _sp(x, y, ux, uy, px, py, s, 0.5,  0.60);
+        dc.drawLine(g1a[0], g1a[1], g1b[0], g1b[1]);  // finger-grip
+        var g2a = _sp(x, y, ux, uy, px, py, s, 0.5, -0.30);
+        var g2b = _sp(x, y, ux, uy, px, py, s, 0.5, -0.60);
+        dc.drawLine(g2a[0], g2a[1], g2b[0], g2b[1]);  // finger-grip
         dc.setPenWidth(1);
     }
 
@@ -303,6 +329,22 @@ class BoostFaceView extends WatchUi.WatchFace {
         dc.fillCircle(px, (py - soleH / 2).toNumber(), toeR);
     }
 
+    // Filled heart (two lobes + triangle) centred at (x,y). Polygon coords MUST be Numbers.
+    function drawHeart(dc, x, y, s, color) as Void {
+        dc.setColor(color, Graphics.COLOR_TRANSPARENT);
+        var lobeR = (s * 0.55).toNumber();
+        var offX  = (s * 0.5).toNumber();
+        var offY  = (s * 0.25).toNumber();
+        dc.fillCircle(x - offX, y - offY, lobeR);
+        dc.fillCircle(x + offX, y - offY, lobeR);
+        var topY = (y - offY * 0.2).toNumber();
+        dc.fillPolygon([
+            [(x - s).toNumber(), topY],
+            [(x + s).toNumber(), topY],
+            [x.toNumber(),       (y + s).toNumber()]
+        ]);
+    }
+
     // Centred battery: icon + "NN%" to its right, the pair centred on cx.
     function drawBatteryCentred(dc, cx, y, wpx, pct) as Void {
         if (pct == null) { pct = 0.0; }
@@ -324,6 +366,11 @@ class BoostFaceView extends WatchUi.WatchFace {
     }
 
     // ── On-device data ──
+    function currentHr() {
+        var info = Activity.getActivityInfo();
+        if (info != null && info.currentHeartRate != null) { return info.currentHeartRate; }
+        return null;
+    }
     function currentSteps() {
         var info = ActivityMonitor.getInfo();
         if (info != null && info.steps != null) { return info.steps; }
