@@ -12,6 +12,9 @@ using Toybox.Math;
 // Layout: Boost BG ring (perimeter) · data-age top · IOB + TBR + big band-coloured BG (blue delta/arrow)
 // · divider · HERO time | date + steps · divider · 12-point BG trend graph · divider · centred battery.
 // Positions are WFF-style box-centres scaled by R = screen/450; centre is (225,225) in that space.
+//
+// Design inspired by the Loopface Connect IQ watch face (an independent implementation for
+// AndroidAPS/Boost): https://apps.garmin.com/en-GB/apps/df1d472a-ffc8-4890-8820-12cee16da2db
 class BoostFaceView extends WatchUi.WatchFace {
 
     var _lowPower as Boolean = false;   // true in always-on (AOD) mode

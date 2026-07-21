@@ -36,6 +36,9 @@ loop data from the AndroidAPS phone app over the Garmin Connect bridge. Without 
 AndroidAPS phone running that data source it shows no data. This is a tool for people
 already running AndroidAPS/Boost; it is not a standalone CGM display.
 
+Design inspired by the **Loopface** Connect IQ watch face
+(https://apps.garmin.com/en-GB/apps/df1d472a-ffc8-4890-8820-12cee16da2db) — with thanks.
+
 Not affiliated with Garmin or Dexcom. Boost/AndroidAPS is DIY open-source software; use
 at your own risk.
 
@@ -48,6 +51,12 @@ captures if you want exact MIP (fenix) rendering — the sim's File → Save Scr
 
 ## Hero image
 `store_assets/hero_1440x720.png` — 1440×720 mobile promo banner.
+
+## Credits / inspiration
+Layout and concept inspired by the **Loopface** Connect IQ watch face by its author
+(https://apps.garmin.com/en-GB/apps/df1d472a-ffc8-4890-8820-12cee16da2db). Boost Graph is
+an independent implementation for AndroidAPS/Boost; credit for the original data-dense
+looping-face design goes to Loopface.
 
 ## Pricing
 Free.
