@@ -91,8 +91,10 @@ class BoostFaceView extends WatchUi.WatchFace {
         hline(dc, R, 176);
 
         // ── HERO time (big, left) | date · steps · HR (right) — taller centre band ──
+        // Time centred within its segment (between the dividers, left of the vertical rule at x292):
+        // horizontal (60..292)/2 = 176, vertical (176..312)/2 = 244.
         dc.setColor(Graphics.COLOR_WHITE, Graphics.COLOR_TRANSPARENT);
-        dc.drawText((148 * R).toNumber(), (246 * R).toNumber(), vf(94, true, R, Graphics.FONT_NUMBER_HOT), timeStr, VC);
+        dc.drawText((176 * R).toNumber(), (244 * R).toNumber(), vf(96, true, R, Graphics.FONT_NUMBER_HOT), timeStr, VC);
         dc.setColor(0x444444, Graphics.COLOR_TRANSPARENT);
         var pw2 = (2 * R).toNumber(); if (pw2 < 1) { pw2 = 1; }
         dc.setPenWidth(pw2);
